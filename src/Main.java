@@ -3,22 +3,23 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
-        /*double[][] values ={{1,0,4, -4}, {-1,1,2,6},{0,-1,0.5, -7},{9,0.23,-1,-5}};
+        double[][] values = {{5, 7, 9, 10}, {2, 3, 3, 8}, {8, 10, 2, 3}, {3, 3, 4, 8}};
         Matrix a = new Matrix(values);
-        values= new double[][]{{1, 5, 3, 0}, {-0.2, 3, 9, -17}, {0.8, 0.01, 2, -5}, {3, 1, 1, 1}};
+        values = new double[][]{{3, 10, 12, 18}, {12, 1, 4, 9}, {9, 10, 12, 2}, {3, 12, 4, 10}};
         Matrix b = new Matrix(values);
         a.print();
+        System.out.println("Multiplied by");
         b.print();
         Matrix c = a.multiply(b);
-        System.out.println();
+        System.out.println("Gives");
         c.print();
-        Matrix d = b.multiply(a);
+        /*Matrix d = b.multiply(a);
         System.out.println();
         d.print();
         Vector v = new Vector(3, 2, -5);
         Vector result = a.multiply(v);
         System.out.println();
-        result.print();¨*/
+        result.print();*/
 
 
         /*TestDrawPoint point = new TestDrawPoint();
