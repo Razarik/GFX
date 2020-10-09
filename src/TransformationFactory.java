@@ -9,11 +9,27 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseTranslate(double x, double y, double z) {
+        Matrix result = new Matrix();
+        result.setValue(0, 3, -x);
+        result.setValue(1, 3, -y);
+        result.setValue(2, 3, -z);
+        return result;
+    }
+
     public Matrix scale(double x, double y, double z) {
         Matrix result = new Matrix();
         result.setValue(0, 0, x);
         result.setValue(1, 1, y);
         result.setValue(2, 2, z);
+        return result;
+    }
+
+    public Matrix inverseScale(double x, double y, double z) {
+        Matrix result = new Matrix();
+        result.setValue(0, 0, 1 / x);
+        result.setValue(1, 1, 1 / y);
+        result.setValue(2, 2, 1 / z);
         return result;
     }
 
@@ -23,9 +39,21 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseShearXByY(double f) {
+        Matrix result = new Matrix();
+        result.setValue(0, 1, -f);
+        return result;
+    }
+
     public Matrix shearXByZ(double f) {
         Matrix result = new Matrix();
         result.setValue(0, 2, f);
+        return result;
+    }
+
+    public Matrix inverseShearXByZ(double f) {
+        Matrix result = new Matrix();
+        result.setValue(0, 2, -f);
         return result;
     }
 
@@ -35,9 +63,21 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseShearYByX(double f) {
+        Matrix result = new Matrix();
+        result.setValue(1, 0, -f);
+        return result;
+    }
+
     public Matrix shearYByZ(double f) {
         Matrix result = new Matrix();
         result.setValue(1, 2, f);
+        return result;
+    }
+
+    public Matrix inverseShearYByZ(double f) {
+        Matrix result = new Matrix();
+        result.setValue(1, 2, -f);
         return result;
     }
 
@@ -47,9 +87,21 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseShearZByX(double f) {
+        Matrix result = new Matrix();
+        result.setValue(2, 0, -f);
+        return result;
+    }
+
     public Matrix shearZByY(double f) {
         Matrix result = new Matrix();
         result.setValue(2, 1, f);
+        return result;
+    }
+
+    public Matrix inverseShearZByY(double f) {
+        Matrix result = new Matrix();
+        result.setValue(2, 1, -f);
         return result;
     }
 
@@ -57,6 +109,17 @@ public class TransformationFactory {
         Matrix result = new Matrix();
         double c = cos(angle);
         double s = sin(angle);
+        result.setValue(1, 1, c);
+        result.setValue(1, 2, -s);
+        result.setValue(2, 1, s);
+        result.setValue(2, 2, c);
+        return result;
+    }
+
+    public Matrix inverseXRoll(double angle) {
+        Matrix result = new Matrix();
+        double c = cos(-angle);
+        double s = sin(-angle);
         result.setValue(1, 1, c);
         result.setValue(1, 2, -s);
         result.setValue(2, 1, s);
@@ -75,6 +138,17 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseYRoll(double angle) {
+        Matrix result = new Matrix();
+        double c = cos(-angle);
+        double s = sin(-angle);
+        result.setValue(0, 0, c);
+        result.setValue(0, 2, s);
+        result.setValue(2, 0, -s);
+        result.setValue(2, 2, c);
+        return result;
+    }
+
     public Matrix zRoll(double angle) {
         Matrix result = new Matrix();
         double c = cos(angle);
@@ -86,9 +160,30 @@ public class TransformationFactory {
         return result;
     }
 
+    public Matrix inverseZRoll(double angle) {
+        Matrix result = new Matrix();
+        double c = cos(-angle);
+        double s = sin(-angle);
+        result.setValue(0, 0, c);
+        result.setValue(0, 1, -s);
+        result.setValue(1, 0, s);
+        result.setValue(1, 1, c);
+        return result;
+    }
+
     public Matrix rotateAroundAxis(double angle, Vector axis) {
         double c = cos(angle);
         double s = sin(angle);
+        return rotateAxis(axis, c, s);
+    }
+
+    public Matrix inverseRotateAroundAxis(double angle, Vector axis) {
+        double c = cos(-angle);
+        double s = sin(-angle);
+        return rotateAxis(axis, c, s);
+    }
+
+    private Matrix rotateAxis(Vector axis, double c, double s) {
         double ux = axis.getValues()[0];
         double uy = axis.getValues()[1];
         double uz = axis.getValues()[2];
