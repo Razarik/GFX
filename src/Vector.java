@@ -8,6 +8,16 @@ public class Vector {
         values[3] = 0;
     }
 
+    public Vector(double x, double y, double z, boolean isPoint) {
+        values[0] = x;
+        values[1] = y;
+        values[2] = z;
+        if (isPoint)
+            values[3] = 1;
+        else
+            values[3] = 0;
+    }
+
     public Vector(double[] values) {
         this.values = values;
         values[3] = 0;

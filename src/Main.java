@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -27,17 +28,26 @@ public class Main {
         System.out.println();
         result.print();*/
 
-        /*
-        WindowFrame wf = new WindowFrame();
+
+        int width = 640;
+        int height = 480;
+        WindowFrame wf = new WindowFrame(width, height);
+        ArrayList<Object> objects = new ArrayList<>();
+        Vector eye = new Vector(0, 0, 0, true);
+        for (int column = 0; column < width; column++) {
+            for (int row = 0; row < height; row++) {
+                //Ray ray = new Ray(eye,0.5, 5, width, height, row, column, 1.5);
+                wf.drawPoint(column, row, Color.green);
+            }
+        }
         wf.setVisible(true);
-        */
 
         TransformationFactory tf = new TransformationFactory();
-        Vector axis = new Vector(7, 3, 0.2);
-        //Matrix A = tf.rotateAroundAxis(1.3, axis);
-        //Matrix B = tf.inverseRotateAroundAxis(1.3, axis);
+        /*Vector axis = new Vector(7, 3, 0.2);
+        Matrix A = tf.rotateAroundAxis(1.3, axis);
+        Matrix B = tf.inverseRotateAroundAxis(1.3, axis);
         Matrix A = tf.yRoll(1.3);
         Matrix B = tf.inverseYRoll(1.3);
-        A.multiply(B).print();
+        A.multiply(B).print();*/
     }
 }

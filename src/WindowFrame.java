@@ -1,16 +1,32 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class WindowFrame extends JFrame {
-    public WindowFrame(){
-        initUI();
+
+    private final PointsComponent comp;
+
+    public WindowFrame(int width, int height) {
+        comp = new PointsComponent();
+        initUI(width, height);
+        getContentPane().add(comp);
     }
 
-    public void initUI(){
-        add(new Surface());
-
+    public void initUI(int width, int height) {
         setTitle("Ray-tracer");
-        setSize(649,480);
+        setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void drawPoint(int x, int y, Color color) {
+        comp.addPoint(x, y, color);
+    }
+
+    public void drawPoint(int x, int y){
+        comp.addPoint(x, y);
+    }
+
+    public void clear() {
+        comp.clearPoints();
     }
 }
