@@ -1,11 +1,11 @@
 import java.awt.*;
 
-public class HitPoint {
-    private double hitTime;
-    private Object object;
-    private Point hitPoint;
+public class Intersection {
+    private double[] hitTime;
+    private Object[] object;
+    private Point[] hitPoint;
 
-    public HitPoint(double hitTime, Object object, Point hitPoint) {
+    public Intersection(double hitTime, Object object, Point hitPoint) {
         this.hitTime = hitTime;
         this.object = object;
         this.hitPoint = hitPoint;
@@ -25,5 +25,13 @@ public class HitPoint {
 
     public void setObject(Object object) {
         this.object = object;
+    }
+
+    public Point getHitPoint() {
+        return hitPoint;
+    }
+
+    public void setHitPoint(Point hitPoint) {
+        this.hitPoint = hitPoint;
     }
 }

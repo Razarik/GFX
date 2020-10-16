@@ -7,6 +7,8 @@ public class Object {
 
     public Object(Color color) {
         this.color = color;
+        transformation = new Matrix();
+        inverseTransformation = new Matrix();
     }
 
     public Color getColor() {
@@ -17,7 +19,7 @@ public class Object {
         this.color = color;
     }
 
-    public HitPoint getHit(Ray ray) {
+    public Intersection getHit(Ray ray) {
         return null;
     }
 
@@ -35,5 +37,10 @@ public class Object {
 
     public void setInverseTransformation(Matrix inverseTransformation) {
         this.inverseTransformation = inverseTransformation;
+    }
+
+    public void transform(Matrix transformation, Matrix inverseTransform) {
+        this.transformation = transformation.multiply(this.transformation);
+        this.inverseTransformation = this.inverseTransformation.multiply(inverseTransform);
     }
 }

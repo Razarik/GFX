@@ -36,14 +36,26 @@ public class Point {
     }
 
     public Point add(Vector v) {
-        return new Point(this.values[0] + v.getValues()[0], this.values[1] + v.getValues()[1], this.values[2] + v.getValues()[2]);
+        return new Point(this.values[0] + v.getX(), this.values[1] + v.getY(), this.values[2] + v.getZ());
     }
 
     public Vector subtract(Point p) {
-        return new Vector(this.values[0] - p.getValues()[0], this.values[1] - p.getValues()[1], this.values[2] - p.getValues()[2]);
+        return new Vector(this.values[0] - p.getX(), this.values[1] - p.getY(), this.values[2] - p.getZ());
     }
 
     public double norm() {
         return Math.sqrt(values[0] * values[0] + values[1] * values[1] + values[2] * values[2]);
+    }
+
+    public double getX() {
+        return values[0];
+    }
+
+    public double getY() {
+        return values[1];
+    }
+
+    public double getZ() {
+        return values[2];
     }
 }

@@ -18,9 +18,9 @@ public class Vector {
     }
 
     public Vector(Point p1, Point p2) {
-        values[0] = p1.getValues()[0] - p2.getValues()[0];
-        values[1] = p1.getValues()[1] - p2.getValues()[1];
-        values[2] = p1.getValues()[2] - p2.getValues()[2];
+        values[0] = p1.getX() - p2.getX();
+        values[1] = p1.getY() - p2.getY();
+        values[2] = p1.getZ() - p2.getZ();
         values[3] = 0;
     }
 
@@ -43,7 +43,7 @@ public class Vector {
     }
 
     public Vector add(Vector v) {
-        return new Vector(this.values[0] + v.getValues()[0], this.values[1] + v.getValues()[1], this.values[2] + v.getValues()[2]);
+        return new Vector(this.values[0] + v.getX(), this.values[1] + v.getY(), this.values[2] + v.getZ());
     }
 
     public Vector multiplyElement(double e) {
@@ -51,7 +51,7 @@ public class Vector {
     }
 
     public Vector crossProduct(Vector v) {
-        return new Vector(this.values[1] * v.getValues()[2] - this.values[2] * v.getValues()[1], this.values[2] * v.getValues()[0] - this.values[0] * v.getValues()[2], this.values[0] * v.getValues()[1] - this.values[1] * v.getValues()[0]);
+        return new Vector(this.values[1] * v.getZ() - this.values[2] * v.getY(), this.values[2] * v.getX() - this.values[0] * v.getZ(), this.values[0] * v.getY() - this.values[1] * v.getX());
     }
 
     public double norm() {
@@ -63,6 +63,18 @@ public class Vector {
     }
 
     public double multiply(Point p){
-        return values[0]*p.getValues()[0]+values[1]*p.getValues()[1]+values[2]*p.getValues()[2];
+        return values[0]*p.getX()+values[1]*p.getY()+values[2]*p.getZ();
+    }
+
+    public double getX() {
+        return values[0];
+    }
+
+    public double getY() {
+        return values[1];
+    }
+
+    public double getZ() {
+        return values[2];
     }
 }

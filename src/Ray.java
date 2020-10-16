@@ -11,11 +11,11 @@ public class Ray {
         this.distance = distance;
         this.screenHeight = screenHeight;
         this.screenWidth = screenWidth;
-        Vector n = viewDirection.multiplyElement(-distance);
+        Vector n = viewDirection.normalise().multiplyElement(-distance);
         double uMultiplier = (screenWidth / 2.0) * (2.0 * column / screenWidth - 1);
-        u = u.multiplyElement(uMultiplier);
+        u = u.normalise().multiplyElement(uMultiplier);
         double vMultiplier = (screenHeight / 2.0) * (2.0 * row / screenHeight - 1);
-        v = v.multiplyElement(vMultiplier);
+        v = v.normalise().multiplyElement(vMultiplier);
         this.direction = n.add(u).add(v);
     }
 
@@ -65,7 +65,7 @@ public class Ray {
     }
 
     public void print(){
-        System.out.println("Eye at: ("+ origin.getValues()[0]+", "+ origin.getValues()[1]+", "+ origin.getValues()[2]+")");
-        System.out.println("Ray direction: ("+direction.getValues()[0]+", "+direction.getValues()[1]+", "+direction.getValues()[2]+")");
+        System.out.println("Eye at: ("+ origin.getX()+", "+ origin.getY()+", "+ origin.getZ()+")");
+        System.out.println("Ray direction: ("+direction.getX()+", "+direction.getY()+", "+direction.getZ()+")");
     }
 }
