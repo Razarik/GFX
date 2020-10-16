@@ -73,6 +73,18 @@ public class Matrix {
         return result;
     }
 
+    public Point multiply(Point point) {
+        Point result = new Point();
+        for (int row = 0; row < 4; row++) {
+            double sum = 0;
+            for (int i = 0; i < 4; i++) {
+                sum += values[row][i] * point.getValues()[i];
+            }
+            result.setValue(row, sum);
+        }
+        return result;
+    }
+
     public void print() {
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 4; column++) {

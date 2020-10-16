@@ -33,14 +33,39 @@ public class Main {
         int height = 480;
         WindowFrame wf = new WindowFrame(width, height);
         ArrayList<Object> objects = new ArrayList<>();
-        Vector eye = new Vector(0, 0, 0, true);
+        objects.add(new Sphere(Color.red, new Point(0, 0, 0), 300));
+        Point eye = new Point(5, 0, 0);
+        Vector viewDirection = new Vector(1, 0, 0);
+        Vector v = new Vector(0, 0, 1);
+        Vector u = new Vector(0, 1, 0);
+        /*Point eye = new Point(10, 5, 3);
+        Vector direction = new Vector(-9.5, -5, -3.5);
+        Ray ray = new Ray(eye, direction);
+        ray.print();
+        objects.get(0).getHit(ray);*/
         for (int column = 0; column < width; column++) {
             for (int row = 0; row < height; row++) {
-                //Ray ray = new Ray(eye,0.5, 5, width, height, row, column, 1.5);
-                wf.drawPoint(column, row, Color.green);
+                Ray ray = new Ray(eye, viewDirection, u, v, 100, width, height, row, column);
+                ray.print();
+                Color toDraw = Color.white;
+                double earliestHitTime = 0;
+                for (Object o : objects) {
+                    HitPoint hp = o.getHit(ray);
+                    if (hp.getHitTime() >= 0 && hp.getHitTime() < earliestHitTime) {
+                        earliestHitTime = hp.getHitTime();
+                        toDraw = hp.getObject().getColor();
+                    }
+                }
+                wf.drawPoint(column, row, Color.red);
             }
         }
         wf.setVisible(true);
+
+
+
+        /*Vector v = new Vector(10, -2, 8);
+        v.normalise().print();
+        System.out.println(v.normalise().norm());*/
 
         TransformationFactory tf = new TransformationFactory();
         /*Vector axis = new Vector(7, 3, 0.2);
