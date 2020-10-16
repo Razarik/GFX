@@ -23,14 +23,14 @@ public class Sphere extends Object {
         double b = 2 * (ray.getDirection().multiply(ray.getOrigin()));
         double c = normOrigin * normOrigin - 1;
         double discriminant = b * b - 4 * a * c;
-        System.out.println(discriminant);
         if (discriminant < 0) {
-            return new HitPoint(-1, this);
+            return new HitPoint(-1, this, null);
         } else if (discriminant == 0) {
-            return new HitPoint((-b) / (2 * a), this);
+            double t = (-b) / (2 * a);
+            return new HitPoint(t, this, origin.add(direction.multiplyElement(t)));
         } else {
-            System.out.println("Hit");
-            return new HitPoint((-b - Math.sqrt(discriminant)) / (2 * a), this);
+            double t = (-b - Math.sqrt(discriminant)) / (2 * a);
+            return new HitPoint(t, this, origin.add(direction.multiplyElement(t)));
         }
     }
 }

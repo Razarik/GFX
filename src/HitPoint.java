@@ -3,10 +3,12 @@ import java.awt.*;
 public class HitPoint {
     private double hitTime;
     private Object object;
+    private Point hitPoint;
 
-    public HitPoint(double hitTime, Object object) {
+    public HitPoint(double hitTime, Object object, Point hitPoint) {
         this.hitTime = hitTime;
         this.object = object;
+        this.hitPoint = hitPoint;
     }
 
     public double getHitTime() {
