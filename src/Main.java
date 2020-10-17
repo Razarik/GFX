@@ -1,10 +1,8 @@
 import Calculations.*;
 import Calculations.Point;
 import Drawing.WindowFrame;
-import Objects.Cube;
-import Objects.Cylinder;
+import Objects.*;
 import Objects.Object;
-import Objects.Sphere;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -47,8 +45,15 @@ public class Main {
         Cube cube1 = new Cube(Color.orange);
         cube1.transform(tf.scale(3, 3, 3).multiply(tf.translate(1, -1.5, 0)), tf.inverseTranslate(1, -1.5, 0).multiply(tf.inverseScale(3, 3, 3)));
         objects.add(cube1);
-        //objects.add(new Objects.Plane(Color.yellow));
-        Calculations.Point eye = new Point(10, 10, 10);
+        //objects.add(new BoundedPlane(Color.yellow, -10, 10, -10, 10));
+        objects.add(new Plane(Color.yellow));
+        Plane plane1 = new Plane(Color.red);
+        plane1.transform(tf.translate(-10, 0, 0).multiply(tf.yRoll(Math.toRadians(90))), tf.inverseYRoll(Math.toRadians(90)).multiply(tf.inverseTranslate(-10, 0, 0)));
+        objects.add(plane1);
+        Plane plane2 = new Plane(Color.green);
+        plane2.transform(tf.translate(0, -10, 0).multiply(tf.xRoll(Math.toRadians(90))), tf.inverseXRoll(Math.toRadians(90)).multiply(tf.inverseTranslate(0, -10, 0)));
+        objects.add(plane2);
+        Point eye = new Point(10, 10, 10);
         Vector viewDirection = new Vector(1, 1, 1);
         Vector v = new Vector(1, 1, -2);
         Vector u = new Vector(-1, 1, 0);
