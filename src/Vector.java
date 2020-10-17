@@ -59,7 +59,8 @@ public class Vector {
     }
 
     public Vector normalise() {
-        return new Vector(values[0] / norm(), values[1] / norm(), values[2] / norm());
+        double norm = norm();
+        return new Vector(values[0] / norm, values[1] / norm, values[2] / norm);
     }
 
     public double multiply(Point p){

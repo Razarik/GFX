@@ -16,12 +16,12 @@ public class Ray {
         u = u.normalise().multiplyElement(uMultiplier);
         double vMultiplier = (screenHeight / 2.0) * (2.0 * row / screenHeight - 1);
         v = v.normalise().multiplyElement(vMultiplier);
-        this.direction = n.add(u).add(v);
+        this.direction = n.add(u).add(v).normalise();
     }
 
     public Ray(Point origin, Vector direction){
         this.origin = origin;
-        this.direction = direction;
+        this.direction = direction.normalise();
     }
 
     public Point getOrigin() {

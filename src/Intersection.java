@@ -1,9 +1,9 @@
 import java.awt.*;
 
 public class Intersection {
-    private double[] hitTime;
-    private Object[] object;
-    private Point[] hitPoint;
+    private double hitTime;
+    private Object object;
+    private Point hitPoint;
 
     public Intersection(double hitTime, Object object, Point hitPoint) {
         this.hitTime = hitTime;
