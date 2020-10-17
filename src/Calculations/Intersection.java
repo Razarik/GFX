@@ -1,4 +1,6 @@
-import java.awt.*;
+package Calculations;
+
+import Objects.Object;
 
 public class Intersection {
     private double hitTime;

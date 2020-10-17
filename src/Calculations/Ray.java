@@ -1,3 +1,5 @@
+package Calculations;
+
 public class Ray {
     private Point origin;
     private Vector direction;
@@ -19,7 +21,7 @@ public class Ray {
         this.direction = n.add(u).add(v).normalise();
     }
 
-    public Ray(Point origin, Vector direction){
+    public Ray(Point origin, Vector direction) {
         this.origin = origin;
         this.direction = direction.normalise();
     }
@@ -64,8 +66,8 @@ public class Ray {
         this.screenHeight = screenHeight;
     }
 
-    public void print(){
-        System.out.println("Eye at: ("+ origin.getX()+", "+ origin.getY()+", "+ origin.getZ()+")");
-        System.out.println("Ray direction: ("+direction.getX()+", "+direction.getY()+", "+direction.getZ()+")");
+    public void print() {
+        System.out.println("Eye at: (" + origin.getX() + ", " + origin.getY() + ", " + origin.getZ() + ")");
+        System.out.println("Calculations.Ray direction: (" + direction.getX() + ", " + direction.getY() + ", " + direction.getZ() + ")");
     }
 }

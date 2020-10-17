@@ -1,3 +1,5 @@
+package Calculations;
+
 public class Vector {
     private double[] values = new double[4];
 
@@ -63,8 +65,8 @@ public class Vector {
         return new Vector(values[0] / norm, values[1] / norm, values[2] / norm);
     }
 
-    public double multiply(Point p){
-        return values[0]*p.getX()+values[1]*p.getY()+values[2]*p.getZ();
+    public double multiply(Point p) {
+        return values[0] * p.getX() + values[1] * p.getY() + values[2] * p.getZ();
     }
 
     public double getX() {

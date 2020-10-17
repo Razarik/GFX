@@ -1,3 +1,5 @@
+package Calculations;
+
 public class Matrix {
     private double[][] values = new double[4][4];
 
@@ -51,11 +53,11 @@ public class Matrix {
         return result;
     }
 
-    public Matrix add(Matrix matrix){
+    public Matrix add(Matrix matrix) {
         Matrix result = new Matrix();
-        for (int row=0; row<4; row++){
-            for (int column =0; column<4; column++){
-                result.setValue(row, column, values[row][column]+matrix.getValue(row, column));
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 4; column++) {
+                result.setValue(row, column, values[row][column] + matrix.getValue(row, column));
             }
         }
         return result;

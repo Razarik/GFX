@@ -1,3 +1,5 @@
+package Calculations;
+
 public class Point {
     private double[] values = new double[4];
 

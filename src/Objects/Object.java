@@ -1,4 +1,11 @@
+package Objects;
+
+import Calculations.Intersection;
+import Calculations.Matrix;
+import Calculations.Ray;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Object {
     private Color color;
@@ -19,8 +26,7 @@ public class Object {
         this.color = color;
     }
 
-    public Intersection getHit(Ray ray) {
-        return null;
+    public void getHit(Ray ray, ArrayList<Intersection> intersections) {
     }
 
     public Matrix getTransformation() {

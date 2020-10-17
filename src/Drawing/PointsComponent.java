@@ -1,3 +1,5 @@
+package Drawing;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
@@ -18,24 +20,24 @@ public class PointsComponent extends JComponent {
 
     private final LinkedList<Point> points = new LinkedList<Point>();
 
-    public void addPoint(int x, int y){
+    public void addPoint(int x, int y) {
         addPoint(x, y, Color.black);
     }
 
-    public void addPoint(int x, int y, Color color){
+    public void addPoint(int x, int y, Color color) {
         points.add(new Point(x, y, color));
         repaint();
     }
 
-    public void clearPoints(){
+    public void clearPoints() {
         points.clear();
         repaint();
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Point point : points){
+        for (Point point : points) {
             g.setColor(point.color);
             g.drawLine(point.x, point.y, point.x, point.y);
         }

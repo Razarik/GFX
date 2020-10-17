@@ -1,3 +1,6 @@
+package Drawing;
+
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +15,7 @@ public class WindowFrame extends JFrame {
     }
 
     public void initUI(int width, int height) {
-        setTitle("Ray-tracer");
+        setTitle("Calculations.Ray-tracer");
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,7 +25,7 @@ public class WindowFrame extends JFrame {
         comp.addPoint(x, y, color);
     }
 
-    public void drawPoint(int x, int y){
+    public void drawPoint(int x, int y) {
         comp.addPoint(x, y);
     }
 
