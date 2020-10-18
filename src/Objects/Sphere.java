@@ -29,12 +29,12 @@ public class Sphere extends Object {
         double discriminant = b * b - 4 * a * c;
         if (discriminant == 0) {
             double t = -b / (2 * a);
-            intersections.add(new Intersection(t, this, origin.add(direction.multiplyElement(t))));
+            intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
             double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
-            intersections.add(new Intersection(t1, this, origin.add(direction.multiplyElement(t1))));
-            intersections.add(new Intersection(t2, this, origin.add(direction.multiplyElement(t2))));
+            intersections.add(new Intersection(t1, color, origin.add(direction.multiplyElement(t1))));
+            intersections.add(new Intersection(t2, color, origin.add(direction.multiplyElement(t2))));
         }
     }
 }

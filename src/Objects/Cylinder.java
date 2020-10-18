@@ -41,7 +41,7 @@ public class Cylinder extends Object {
             double t = -b / (2 * a);
             double z = origin.getZ() + t * direction.getZ();
             if (z <= 1 && z >= 0) {
-                intersections.add(new Intersection(t, this, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
             }
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
@@ -49,10 +49,10 @@ public class Cylinder extends Object {
             double z1 = origin.getZ() + t1 * direction.getZ();
             double z2 = origin.getZ() + t2 * direction.getZ();
             if (z1 <= 1 && z1 >= 0) {
-                intersections.add(new Intersection(t1, this, origin.add(direction.multiplyElement(t1))));
+                intersections.add(new Intersection(t1, color, origin.add(direction.multiplyElement(t1))));
             }
             if (z2 <= 1 && z2 >= 0) {
-                intersections.add(new Intersection(t2, this, origin.add(direction.multiplyElement(t2))));
+                intersections.add(new Intersection(t2, color, origin.add(direction.multiplyElement(t2))));
             }
         }
     }
@@ -61,7 +61,7 @@ public class Cylinder extends Object {
         double x = origin.getX() + direction.getX() * t;
         double y = origin.getY() + direction.getY() * t;
         if (x * x + y * y < radius * radius) {
-            intersections.add(new Intersection(t, this, origin.add(direction.multiplyElement(t))));
+            intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
         }
     }
 }

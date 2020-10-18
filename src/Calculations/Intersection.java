@@ -2,14 +2,16 @@ package Calculations;
 
 import Objects.Object;
 
+import java.awt.*;
+
 public class Intersection {
     private double hitTime;
-    private Object object;
+    private Color color;
     private Point hitPoint;
 
-    public Intersection(double hitTime, Object object, Point hitPoint) {
+    public Intersection(double hitTime, Color color, Point hitPoint) {
         this.hitTime = hitTime;
-        this.object = object;
+        this.color = color;
         this.hitPoint = hitPoint;
     }
 
@@ -21,19 +23,19 @@ public class Intersection {
         this.hitTime = hitTime;
     }
 
-    public Object getObject() {
-        return object;
-    }
-
-    public void setObject(Object object) {
-        this.object = object;
-    }
-
     public Point getHitPoint() {
         return hitPoint;
     }
 
     public void setHitPoint(Point hitPoint) {
         this.hitPoint = hitPoint;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Object {
-    private Color color;
+    protected Color color;
     protected Matrix transformation;
     protected Matrix inverseTransformation;
 

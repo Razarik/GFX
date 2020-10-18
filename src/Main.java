@@ -39,13 +39,12 @@ public class Main {
         Cylinder cylinder2 = new Cylinder(Color.gray, 0.3);
         cylinder2.transform(tf.scale(1, 1, 3).multiply(tf.translate(5, 0, 0)), tf.inverseTranslate(5, 0, 0).multiply(tf.inverseScale(1, 1, 3)));
         objects.add(cylinder2);
-        Cylinder cylinder3 = new Cylinder(Color.white, 1);
+        Cylinder cylinder3 = new Cylinder(new Color(52, 235, 155), 1);
         cylinder3.transform(tf.scale(1, 1, 3).multiply(tf.translate(0, 5, 0)), tf.inverseTranslate(0, 5, 0).multiply(tf.inverseScale(1, 1, 3)));
         objects.add(cylinder3);
         Cube cube1 = new Cube(Color.orange);
         cube1.transform(tf.scale(3, 3, 3).multiply(tf.translate(1, -1.5, 0)), tf.inverseTranslate(1, -1.5, 0).multiply(tf.inverseScale(3, 3, 3)));
         objects.add(cube1);
-        //objects.add(new BoundedPlane(Color.yellow, -10, 10, -10, 10));
         objects.add(new Plane(Color.yellow));
         Plane plane1 = new Plane(Color.red);
         plane1.transform(tf.translate(-10, 0, 0).multiply(tf.yRoll(Math.toRadians(90))), tf.inverseYRoll(Math.toRadians(90)).multiply(tf.inverseTranslate(-10, 0, 0)));
@@ -85,7 +84,7 @@ public class Main {
                 if (bestIntersection == null) {
                     wf.drawPoint(column, row, toDraw);
                 } else {
-                    wf.drawPoint(column, row, bestIntersection.getObject().getColor());
+                    wf.drawPoint(column, row, bestIntersection.getColor());
                 }
             }
         }
