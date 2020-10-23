@@ -4,13 +4,15 @@ import Calculations.Intersection;
 import Calculations.Ray;
 import Calculations.Vector;
 import Calculations.Point;
+import Light.Colour;
+import Light.Material;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Plane extends Object {
-    public Plane(Color color) {
-        super(color);
+    public Plane(Material material) {
+        super(material);
     }
 
     public void getHit(Ray ray, ArrayList<Intersection> intersections) {
@@ -18,7 +20,7 @@ public class Plane extends Object {
         Point origin = inverseTransformation.multiply(ray.getOrigin());
         if (direction.getZ() != 0) {
             double t = -origin.getZ() / direction.getZ();
-            intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+            intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this));
         }
     }
 }

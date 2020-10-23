@@ -69,6 +69,10 @@ public class Vector {
         return values[0] * p.getX() + values[1] * p.getY() + values[2] * p.getZ();
     }
 
+    public double dotProduct(Vector v) {
+        return values[0] * v.getX() + values[1] * v.getY() + values[2] * v.getZ();
+    }
+
     public double getX() {
         return values[0];
     }

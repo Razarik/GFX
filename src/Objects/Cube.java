@@ -4,14 +4,16 @@ import Calculations.Intersection;
 import Calculations.Point;
 import Calculations.Ray;
 import Calculations.Vector;
+import Light.Colour;
+import Light.Material;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Cube extends Object {
 
-    public Cube(Color color) {
-        super(color);
+    public Cube(Material material) {
+        super(material);
     }
 
     public void getHit(Ray ray, ArrayList<Intersection> intersections) {
@@ -22,7 +24,7 @@ public class Cube extends Object {
             double y = origin.getY() + t * direction.getY();
             double z = origin.getZ() + t * direction.getZ();
             if (y <= 1 && y >= -1 && z <= 1 && z >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(-1, 0, 0)), this));
             }
         }
         if (direction.getX() != 1) {
@@ -30,7 +32,7 @@ public class Cube extends Object {
             double y = origin.getY() + t * direction.getY();
             double z = origin.getZ() + t * direction.getZ();
             if (y <= 1 && y >= -1 && z <= 1 && z >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(1, 0, 0)), this));
             }
         }
         if (direction.getY() != -1) {
@@ -38,7 +40,7 @@ public class Cube extends Object {
             double x = origin.getX() + t * direction.getX();
             double z = origin.getZ() + t * direction.getZ();
             if (x <= 1 && x >= -1 && z <= 1 && z >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, -1, 0)), this));
             }
         }
         if (direction.getY() != 1) {
@@ -46,7 +48,7 @@ public class Cube extends Object {
             double x = origin.getX() + t * direction.getX();
             double z = origin.getZ() + t * direction.getZ();
             if (x <= 1 && x >= -1 && z <= 1 && z >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 1, 0)), this));
             }
         }
         if (direction.getZ() != -1) {
@@ -54,7 +56,7 @@ public class Cube extends Object {
             double x = origin.getX() + t * direction.getX();
             double y = origin.getY() + t * direction.getY();
             if (x <= 1 && x >= -1 && y <= 1 && y >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, -1)), this));
             }
         }
         if (direction.getZ() != 1) {
@@ -62,7 +64,7 @@ public class Cube extends Object {
             double x = origin.getX() + t * direction.getX();
             double y = origin.getY() + t * direction.getY();
             if (x <= 1 && x >= -1 && y <= 1 && y >= -1) {
-                intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this));
             }
         }
     }

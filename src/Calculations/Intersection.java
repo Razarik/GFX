@@ -1,18 +1,19 @@
 package Calculations;
 
-import Objects.Object;
-
 import java.awt.*;
+import Objects.Object;
 
 public class Intersection {
     private double hitTime;
-    private Color color;
     private Point hitPoint;
+    private Vector hitNormal;
+    private Object hitObject;
 
-    public Intersection(double hitTime, Color color, Point hitPoint) {
+    public Intersection(double hitTime, Point hitPoint, Vector hitNormal, Object object) {
         this.hitTime = hitTime;
-        this.color = color;
         this.hitPoint = hitPoint;
+        this.hitNormal = hitNormal;
+        this.hitObject = object;
     }
 
     public double getHitTime() {
@@ -31,11 +32,19 @@ public class Intersection {
         this.hitPoint = hitPoint;
     }
 
-    public Color getColor() {
-        return color;
+    public Vector getHitNormal() {
+        return hitNormal;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setHitNormal(Vector hitNormal) {
+        this.hitNormal = hitNormal;
+    }
+
+    public Object getHitObject() {
+        return hitObject;
+    }
+
+    public void setHitObject(Object hitObject) {
+        this.hitObject = hitObject;
     }
 }

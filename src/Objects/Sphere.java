@@ -5,17 +5,16 @@ import Calculations.Ray;
 import Calculations.TransformationFactory;
 import Calculations.Vector;
 import Calculations.Point;
+import Light.Colour;
+import Light.Material;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Sphere extends Object {
 
-    public Sphere(Color color, Point center, double radius) {
-        super(color);
-        TransformationFactory tf = new TransformationFactory();
-        this.transformation = tf.translate(center.getX(), center.getY(), center.getZ()).multiply(tf.scale(radius, radius, radius));
-        this.inverseTransformation = tf.inverseScale(radius, radius, radius).multiply(tf.translate(center.getX(), center.getY(), center.getZ()));
+    public Sphere(Material material) {
+        super(material);
     }
 
     public void getHit(Ray ray, ArrayList<Intersection> intersections) {
@@ -29,12 +28,15 @@ public class Sphere extends Object {
         double discriminant = b * b - 4 * a * c;
         if (discriminant == 0) {
             double t = -b / (2 * a);
-            intersections.add(new Intersection(t, color, origin.add(direction.multiplyElement(t))));
+            Point p = origin.add(direction.multiplyElement(t));
+            intersections.add(new Intersection(t, transformation.multiply(p), transformation.multiply(p.subtract(new Point(0, 0, 0))), this));
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            Point p1 = origin.add(direction.multiplyElement(t1));
             double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
-            intersections.add(new Intersection(t1, color, origin.add(direction.multiplyElement(t1))));
-            intersections.add(new Intersection(t2, color, origin.add(direction.multiplyElement(t2))));
+            Point p2 = origin.add(direction.multiplyElement(t2));
+            intersections.add(new Intersection(t1, transformation.multiply(p1), transformation.multiply(p1.subtract(new Point(0, 0, 0))), this));
+            intersections.add(new Intersection(t2, transformation.multiply(p2), transformation.multiply(p2.subtract(new Point(0, 0, 0))), this));
         }
     }
 }

@@ -15,7 +15,7 @@ public class WindowFrame extends JFrame {
     }
 
     public void initUI(int width, int height) {
-        setTitle("Calculations.Ray-tracer");
+        setTitle("Ray-tracer");
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
