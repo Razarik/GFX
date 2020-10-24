@@ -3,7 +3,6 @@ package Objects;
 import Calculations.Intersection;
 import Calculations.Matrix;
 import Calculations.Ray;
-import Light.Colour;
 import Light.Material;
 
 import java.util.ArrayList;

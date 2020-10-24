@@ -4,10 +4,8 @@ import Calculations.Intersection;
 import Calculations.Ray;
 import Calculations.Vector;
 import Calculations.Point;
-import Light.Colour;
 import Light.Material;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Cylinder extends Object {

@@ -4,10 +4,8 @@ import Calculations.Intersection;
 import Calculations.Point;
 import Calculations.Ray;
 import Calculations.Vector;
-import Light.Colour;
 import Light.Material;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Square extends Object {

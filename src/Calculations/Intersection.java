@@ -1,6 +1,5 @@
 package Calculations;
 
-import java.awt.*;
 import Objects.Object;
 
 public class Intersection {

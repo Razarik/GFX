@@ -9,8 +9,8 @@ public class Colour {
 
     public Colour(double r, double g, double b) {
         this.r = Math.min(1, Math.max(0, r));
-        this.g = Math.min(1, Math.max(0, b));
-        this.b = Math.min(1, Math.max(0, g));
+        this.g = Math.min(1, Math.max(0, g));
+        this.b = Math.min(1, Math.max(0, b));
     }
 
     public Color getColor() {

@@ -2,8 +2,6 @@ package Light;
 
 import Calculations.Point;
 
-import java.awt.*;
-
 public class LightSource {
     private Point point;
     private Colour colour;
