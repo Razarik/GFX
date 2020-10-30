@@ -44,4 +44,8 @@ public class Colour {
 
         return new Colour(r * e, g * e, b * e);
     }
+
+    public String toString() {
+        return (r + ", " + g + ", " + b);
+    }
 }

@@ -15,6 +15,16 @@ public class Ray {
         this.direction = n.add(u).add(v).normalise();
     }
 
+    public Ray(Camera camera, int screenWidth, int screenHeight, int row, int column){
+        this.origin = camera.getEye();
+        Vector n = camera.getDirection().normalise().multiplyElement(-camera.getDistance());
+        double uMultiplier = (screenWidth / 2.0) * (2.0 * column / screenWidth - 1);
+        Vector u = camera.getUp().normalise().multiplyElement(uMultiplier);
+        double vMultiplier = (screenHeight / 2.0) * (2.0 * row / screenHeight - 1);
+        Vector v = camera.getSide().normalise().multiplyElement(vMultiplier);
+        this.direction = n.add(u).add(v).normalise();
+    }
+
     public Ray(Point origin, Vector direction) {
         this.origin = origin;
         this.direction = direction.normalise();
