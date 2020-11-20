@@ -7,12 +7,14 @@ public class Intersection {
     private Point hitPoint;
     private Vector hitNormal;
     private Object hitObject;
+    private boolean isEntering;
 
-    public Intersection(double hitTime, Point hitPoint, Vector hitNormal, Object object) {
+    public Intersection(double hitTime, Point hitPoint, Vector hitNormal, Object object, boolean isEntering) {
         this.hitTime = hitTime;
         this.hitPoint = hitPoint;
         this.hitNormal = hitNormal;
         this.hitObject = object;
+        this.isEntering = isEntering;
     }
 
     public double getHitTime() {
@@ -45,5 +47,13 @@ public class Intersection {
 
     public void setHitObject(Object hitObject) {
         this.hitObject = hitObject;
+    }
+
+    public boolean isEntering() {
+        return isEntering;
+    }
+
+    public void setEntering(boolean entering) {
+        isEntering = entering;
     }
 }

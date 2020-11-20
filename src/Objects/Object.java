@@ -46,6 +46,6 @@ public abstract class Object {
 
     public void transform(Matrix transformation, Matrix inverseTransform) {
         this.transformation = transformation.multiply(this.transformation);
-        this.inverseTransformation = this.inverseTransformation.multiply(inverseTransform);
+        this.inverseTransformation = inverseTransform.multiply(this.inverseTransformation);
     }
 }

@@ -26,14 +26,24 @@ public class Sphere extends Object {
         if (discriminant == 0) {
             double t = -b / (2 * a);
             Point p = origin.add(direction.multiplyElement(t));
-            intersections.add(new Intersection(t, transformation.multiply(p), transformation.multiply(p.subtract(new Point(0, 0, 0))), this));
+            intersections.add(new Intersection(t, transformation.multiply(p), transformation.multiply(p.subtract(new Point(0, 0, 0))), this, false));
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
             Point p1 = origin.add(direction.multiplyElement(t1));
+            Vector normal1 = p1.subtract(new Point(0, 0, 0));
+            boolean entering1 = false;
+            if (direction.multiplyElement(-1).dotProduct(normal1) >= 0) {
+                entering1 = true;
+            }
             double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
             Point p2 = origin.add(direction.multiplyElement(t2));
-            intersections.add(new Intersection(t1, transformation.multiply(p1), transformation.multiply(p1.subtract(new Point(0, 0, 0))), this));
-            intersections.add(new Intersection(t2, transformation.multiply(p2), transformation.multiply(p2.subtract(new Point(0, 0, 0))), this));
+            Vector normal2 = p2.subtract(new Point(0, 0, 0));
+            boolean entering2 = false;
+            if (direction.multiplyElement(-1).dotProduct(normal2) >= 0) {
+                entering2 = true;
+            }
+            intersections.add(new Intersection(t1, transformation.multiply(p1), transformation.multiply(normal1), this, entering1));
+            intersections.add(new Intersection(t2, transformation.multiply(p2), transformation.multiply(normal2), this, entering2));
         }
     }
 }

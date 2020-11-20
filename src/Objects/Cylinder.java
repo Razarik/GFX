@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Cylinder extends Object {
 
-    private double topRadius;
+    private final double topRadius;
 
     public Cylinder(Material material) {
         super(material);
@@ -42,18 +42,27 @@ public class Cylinder extends Object {
             double t = -b / (2 * a);
             double z = origin.getZ() + t * direction.getZ();
             if (z <= 1 && z >= 0) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(origin.getX() + t * direction.getX(), origin.getY() + t * direction.getY(), -u * (1 + u * z))), this));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(origin.getX() + t * direction.getX(), origin.getY() + t * direction.getY(), -u * (1 + u * z))), this, false));
             }
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
             double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
             double z1 = origin.getZ() + t1 * direction.getZ();
             double z2 = origin.getZ() + t2 * direction.getZ();
+            boolean entering = false;
             if (z1 <= 1 && z1 >= 0) {
-                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), transformation.multiply(new Vector(origin.getX() + t1 * direction.getX(), origin.getY() + t1 * direction.getY(), -u * (1 + u * z1))), this));
+                Vector normal = new Vector(origin.getX() + t1 * direction.getX(), origin.getY() + t1 * direction.getY(), -u * (1 + u * z1));
+                if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
+                    entering = true;
+                }
+                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), transformation.multiply(normal), this, entering));
             }
             if (z2 <= 1 && z2 >= 0) {
-                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), transformation.multiply(new Vector(origin.getX() + t2 * direction.getX(), origin.getY() + t2 * direction.getY(), -u * (1 + u * z2))), this));
+                Vector normal = new Vector(origin.getX() + t2 * direction.getX(), origin.getY() + t2 * direction.getY(), -u * (1 + u * z2));
+                if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
+                    entering = true;
+                }
+                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), transformation.multiply(normal), this, entering));
             }
         }
     }
@@ -61,11 +70,19 @@ public class Cylinder extends Object {
     private void addIfInCap(ArrayList<Intersection> intersections, Point origin, Vector direction, double t, double radius, boolean isTop) {
         double x = origin.getX() + direction.getX() * t;
         double y = origin.getY() + direction.getY() * t;
-        if (x * x + y * y < radius * radius) {
+        double epsilon = 0.00001;
+        boolean entering = false;
+        if (x * x + y * y < radius * radius + epsilon) {
             if (isTop) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this));
+                if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, 1)) >= 0) {
+                    entering = true;
+                }
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this, entering));
             } else {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, -1)), this));
+                if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, -1)) >= 0) {
+                    entering = true;
+                }
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, -1)), this, entering));
             }
         }
     }

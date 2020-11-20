@@ -6,13 +6,19 @@ public class Material {
     private Colour specular;
     private double specularExponent;
     private Colour ambient;
+    private double shininess;
+    private double transparency;
+    private double relativeLightSpeed;
 
-    public Material(Colour emissive, Colour diffuse, Colour specular, double specularExponent, Colour ambient) {
+    public Material(Colour emissive, Colour diffuse, Colour specular, double specularExponent, Colour ambient, double shininess, double transparency, double relativeLightSpeed) {
         this.emissive = emissive;
         this.diffuse = diffuse;
         this.specular = specular;
         this.specularExponent = specularExponent;
         this.ambient = ambient;
+        this.shininess = shininess;
+        this.transparency = transparency;
+        this.relativeLightSpeed = relativeLightSpeed;
     }
 
     public Colour getEmissive() {
@@ -53,5 +59,29 @@ public class Material {
 
     public void setAmbient(Colour ambient) {
         this.ambient = ambient;
+    }
+
+    public double getShininess() {
+        return shininess;
+    }
+
+    public void setShininess(double shininess) {
+        this.shininess = shininess;
+    }
+
+    public double getTransparency() {
+        return transparency;
+    }
+
+    public void setTransparency(double transparency) {
+        this.transparency = transparency;
+    }
+
+    public double getRelativeLightSpeed() {
+        return relativeLightSpeed;
+    }
+
+    public void setRelativeLightSpeed(double relativeLightSpeed) {
+        this.relativeLightSpeed = relativeLightSpeed;
     }
 }

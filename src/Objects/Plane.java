@@ -18,7 +18,11 @@ public class Plane extends Object {
         Point origin = inverseTransformation.multiply(ray.getOrigin());
         if (direction.getZ() != 0) {
             double t = -origin.getZ() / direction.getZ();
-            intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this));
+            boolean entering = false;
+            if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, 1)) >= 0) {
+                entering = true;
+            }
+            intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this, entering));
         }
     }
 }

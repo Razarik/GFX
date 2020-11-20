@@ -5,10 +5,12 @@ import Calculations.Point;
 public class LightSource {
     private Point point;
     private Colour colour;
+    private Colour ambientContribution;
 
-    public LightSource(Point point, Colour colour) {
+    public LightSource(Point point, Colour colour, Colour ambient) {
         this.point = point;
         this.colour = colour;
+        this.ambientContribution = ambient;
     }
 
     public Point getPoint() {
@@ -25,5 +27,13 @@ public class LightSource {
 
     public void setColour(Colour colour) {
         this.colour = colour;
+    }
+
+    public Colour getAmbientContribution() {
+        return ambientContribution;
+    }
+
+    public void setAmbientContribution(Colour ambientContribution) {
+        this.ambientContribution = ambientContribution;
     }
 }
