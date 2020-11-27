@@ -40,36 +40,39 @@ public class Main {
                 for (Object o : objects) {
                     o.getHit(shadowRay, shadows);
                 }
-                boolean shaded = false;
+                double shadeFactor = 0;
                 for (Intersection shadowIntersection : shadows) {
                     if (shadowIntersection.getHitTime() > epsilon && shadowIntersection.getHitTime() < 1) {
-                        shaded = true;
+                        if (shadowIntersection.isEntering()) {
+                            shadeFactor = shadeFactor + (1 - shadowIntersection.getHitObject().getMaterial().getTransparency());
+                        }
                     }
+                }
+                if (shadeFactor > 1) {
+                    shadeFactor = 1;
                 }
                 //Ambient colour
                 colour = colour.add(l.getAmbientContribution().multiply(object.getMaterial().getAmbient()));
-                if (!shaded) {
-                    // Diffuse colour
-                    Vector s = l.getPoint().subtract(hitPoint).normalise();
-                    double mDotS = s.dotProduct(normal);
-                    if (mDotS > 0.0) {
-                        Colour diffuseColour = object.getMaterial().getDiffuse().multiply(mDotS).multiply(l.getColour());
-                        colour = colour.add(diffuseColour);
-                    }
+                // Diffuse colour
+                Vector s = l.getPoint().subtract(hitPoint).normalise();
+                double mDotS = s.dotProduct(normal);
+                if (mDotS > 0.0) {
+                    Colour diffuseColour = object.getMaterial().getDiffuse().multiply(mDotS).multiply(l.getColour()).multiply(1 - shadeFactor);
+                    colour = colour.add(diffuseColour);
+                }
 
-                    // Specular colour
-                    Vector h = view.add(s).normalise();
-                    double mDotH = h.dotProduct(normal);
-                    if (mDotH > 0.0) {
-                        double phong = Math.pow(mDotH, object.getMaterial().getSpecularExponent());
-                        Colour specularColour = object.getMaterial().getSpecular().multiply(phong).multiply(l.getColour());
-                        colour = colour.add(specularColour);
-                    }
+                // Specular colour
+                Vector h = view.add(s).normalise();
+                double mDotH = h.dotProduct(normal);
+                if (mDotH > 0.0) {
+                    double phong = Math.pow(mDotH, object.getMaterial().getSpecularExponent());
+                    Colour specularColour = object.getMaterial().getSpecular().multiply(phong).multiply(l.getColour()).multiply(1 - shadeFactor);
+                    colour = colour.add(specularColour);
                 }
             }
-            if (depth <= 15) {
+            if (depth <= 5) {
                 boolean toReflect = false;
-                if (object.getMaterial().getTransparency() >= 0.3) { // If object is transparent enough
+                if (object.getMaterial().getTransparency() >= 0.05) { // If object is transparent enough
                     if (ray.getMedium() == null) { // Ray was in air, going in object
                         double c1 = 1;
                         double c2 = object.getMaterial().getRelativeLightSpeed();
@@ -96,10 +99,10 @@ public class Main {
                         }
                     }
                 }
-                if (object.getMaterial().getShininess() >= 0.3 || toReflect) {  // If object is shiny enough to reflect
+                if (object.getMaterial().getShininess() >= 0.05 || toReflect) {  // If object is shiny enough to reflect
                     Ray reflection = new Ray(hitPoint, ray.getDirection().add(normal.multiplyElement(ray.getDirection().dotProduct(normal) * -2)), ray.getMedium());
                     Colour reflectionColour = getShade(reflection, objects, lights, depth + 1, eye);
-                    if (toReflect){
+                    if (toReflect) {
                         colour = colour.add(reflectionColour.multiply(object.getMaterial().getTransparency()));
                     }
                     colour = colour.add(reflectionColour.multiply(object.getMaterial().getShininess()));
@@ -148,7 +151,7 @@ public class Main {
 
         Material mirrorMaterial = new Material(new Colour(0, 0, 0), new Colour(0, 0, 0), new Colour(0, 0, 0), 0, new Colour(0, 0, 0), 1, 0, 0);
         Material fineSpecular = new Material(new Colour(0, 0, 0), new Colour(0.61424, 0.04136, 0.04136), new Colour(0.727811, 0.626959, 0.626959), 500, new Colour(0.1745, 0.01175, 0.01175), 0, 0, 0);
-        Material glass = new Material(new Colour(0, 0, 0), new Colour(0, 0, 0), new Colour(0, 0, 0), 0, new Colour(0, 0, 0), 0, 1, 0.55);
+        Material glass = new Material(new Colour(0, 0, 0), new Colour(0, 0, 0), new Colour(0, 0, 0), 100, new Colour(0, 0, 0), 0.2, 0.9, 0.55);
 
         // Build objects
         ArrayList<Object> objects = new ArrayList<>();
@@ -209,17 +212,13 @@ public class Main {
         objects.add(mirror);
 
         Cube glassPane = new Cube(glass);
-        glassPane.transform(tf.translate(-10, 0, 4).multiply(tf.scale(0.2, 3, 3)), tf.inverseScale(0.2, 3, 3).multiply(tf.inverseTranslate(-10, 0, 4)));
+        glassPane.transform(tf.translate(10, 0, 4).multiply(tf.scale(0.2, 3, 3)), tf.inverseScale(0.2, 3, 3).multiply(tf.inverseTranslate(10, 0, 4)));
         objects.add(glassPane);
 
-        Sphere behindGlass = new Sphere(bluePlastic);
-        behindGlass.transform(tf.translate(-12, 2.5, 2), tf.inverseTranslate(-12, 2.5, 2));
-        objects.add(behindGlass);
-
         // Declare camera position
-        Point eye = new Point(15, 10, 5);
+        Point eye = new Point(15, 15, 15);
 
-        Camera camera = new Camera(eye, new Point(0, 0, 5), 0, 1000);
+        Camera camera = new Camera(eye, new Point(0, 0, 0), 0, 1000);
 
         // Build light sources
         ArrayList<LightSource> lights = new ArrayList<>();
