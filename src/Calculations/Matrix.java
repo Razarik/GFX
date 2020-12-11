@@ -95,4 +95,14 @@ public class Matrix {
             System.out.println();
         }
     }
+
+    public Matrix transpose() {
+        Matrix result = new Matrix();
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 4; column++) {
+                result.setValue(row, column, this.getValue(column, row));
+            }
+        }
+        return result;
+    }
 }

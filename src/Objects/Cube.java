@@ -27,7 +27,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(z) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(-1, 0, 0)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(-1, 0, 0)), this, entering));
             }
         }
         if (direction.getX() != 1) {
@@ -39,7 +39,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(z) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(1, 0, 0)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(1, 0, 0)), this, entering));
             }
         }
         if (direction.getY() != -1) {
@@ -51,7 +51,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(z) < 1 + epsilon && Math.abs(x) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, -1, 0)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, -1, 0)), this, entering));
             }
         }
         if (direction.getY() != 1) {
@@ -63,7 +63,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(z) < 1 + epsilon && Math.abs(x) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 1, 0)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 1, 0)), this, entering));
             }
         }
         if (direction.getZ() != -1) {
@@ -75,7 +75,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(x) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, -1)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, -1)), this, entering));
             }
         }
         if (direction.getZ() != 1) {
@@ -87,7 +87,7 @@ public class Cube extends Object {
                 entering = true;
             }
             if (Math.abs(x) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, 1)), this, entering));
             }
         }
     }

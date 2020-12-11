@@ -42,7 +42,7 @@ public class Cylinder extends Object {
             double t = -b / (2 * a);
             double z = origin.getZ() + t * direction.getZ();
             if (z <= 1 && z >= 0) {
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(origin.getX() + t * direction.getX(), origin.getY() + t * direction.getY(), -u * (1 + u * z))), this, false));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(origin.getX() + t * direction.getX(), origin.getY() + t * direction.getY(), -u * (1 + u * z))), this, false));
             }
         } else if (discriminant > 0) {
             double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
@@ -55,14 +55,14 @@ public class Cylinder extends Object {
                 if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
                     entering = true;
                 }
-                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), transformation.multiply(normal), this, entering));
+                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), inverseTransformation.transpose().multiply(normal), this, entering));
             }
             if (z2 <= 1 && z2 >= 0) {
                 Vector normal = new Vector(origin.getX() + t2 * direction.getX(), origin.getY() + t2 * direction.getY(), -u * (1 + u * z2));
                 if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
                     entering = true;
                 }
-                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), transformation.multiply(normal), this, entering));
+                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), inverseTransformation.transpose().multiply(normal), this, entering));
             }
         }
     }
@@ -77,12 +77,12 @@ public class Cylinder extends Object {
                 if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, 1)) >= 0) {
                     entering = true;
                 }
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, 1)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, 1)), this, entering));
             } else {
                 if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, -1)) >= 0) {
                     entering = true;
                 }
-                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), transformation.multiply(new Vector(0, 0, -1)), this, entering));
+                intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, -1)), this, entering));
             }
         }
     }
