@@ -111,7 +111,6 @@ public class Main {
                     double cosTheta2Sqr = 1 - ((ratio * ratio) * (1 - (mDotDir * mDotDir)));
                     if (cosTheta2Sqr <= epsilon) {
                         toReflect = true;
-                        System.out.println("Test");
                         if (bestIntersection.isEntering()) {
                             ray.removeInside(object);
                         } else {
@@ -157,13 +156,13 @@ public class Main {
         // TODO: find realistic reflection, refraction and density
         Material emerald = new Material(new Colour(0, 0, 0), new Colour(0.07568, 0.61424, 0.07568), new Colour(0.633, 0.727811, 0.633), 76.8, new Colour(0.0215, 0.1745, 0.0215), 0, 0, 0);
         Material brass = new Material(new Colour(0, 0, 0), new Colour(0.780392, 0.568627, 0.113725), new Colour(0.992157, 0.941176, 0.807843), 27.8974, new Colour(0.329412, 0.223529, 0.027451), 0, 0, 0);
-        Material jade = new Material(new Colour(0, 0, 0), new Colour(0.54, 0.89, 0.63), new Colour(0.316228, 0.316228, 0.316228), 12.8, new Colour(0.135, 0.2225, 0.1575), 0, 0, 0);
+        Material jade = new Material(new Colour(0, 0, 0), new Colour(0.54, 0.89, 0.63), new Colour(0.316228, 0.316228, 0.316228), 12.8, new Colour(0.135, 0.2225, 0.1575), 0.3, 0, 0);
         Material obsidian = new Material(new Colour(0, 0, 0), new Colour(0.18275, 0.17, 0.22525), new Colour(0.332741, 0.328634, 0.346435), 38.4, new Colour(0.05375, 0.05, 0.06625), 0, 0, 0);
         Material pearl = new Material(new Colour(0, 0, 0), new Colour(1, 0.829, 0.829), new Colour(0.296648, 0.296648, 0.296648), 11.264, new Colour(0.25, 0.20725, 0.20725), 0, 0, 0);
         Material ruby = new Material(new Colour(0, 0, 0), new Colour(0.61424, 0.04136, 0.04136), new Colour(0.727811, 0.626959, 0.626959), 76.8, new Colour(0.1745, 0.01175, 0.01175), 0, 0, 0);
         Material turquoise = new Material(new Colour(0, 0, 0), new Colour(0.396, 0.74151, 0.69102), new Colour(0.297254, 0.30829, 0.306678), 12.8, new Colour(0.1, 0.18725, 0.1745), 0, 0, 0);
         Material bronze = new Material(new Colour(0, 0, 0), new Colour(0.714, 0.4284, 0.18144), new Colour(0.393548, 0.271906, 0.166721), 25.6, new Colour(0.2125, 0.1275, 0.054), 0, 0, 0);
-        Material chrome = new Material(new Colour(0, 0, 0), new Colour(0.4, 0.4, 0.4), new Colour(0.774597, 0.774597, 0.774597), 76.8, new Colour(0.25, 0.25, 0.25), 0, 0, 0);
+        Material chrome = new Material(new Colour(0, 0, 0), new Colour(0.4, 0.4, 0.4), new Colour(0.774597, 0.774597, 0.774597), 76.8, new Colour(0.25, 0.25, 0.25), 0.7, 0, 0);
         Material copper = new Material(new Colour(0, 0, 0), new Colour(0.7038, 0.27048, 0.0828), new Colour(0.256777, 0.137622, 0.086014), 12.8, new Colour(0.19125, 0.0735, 0.0225), 0, 0, 0);
         Material gold = new Material(new Colour(0, 0, 0), new Colour(0.75164, 0.60648, 0.22648), new Colour(0.628281, 0.555802, 0.366065), 51.2, new Colour(0.24725, 0.1995, 0.0745), 0, 0, 0);
         Material silver = new Material(new Colour(0, 0, 0), new Colour(0.50754, 0.50754, 0.50754), new Colour(0.508273, 0.508273, 0.508273), 51.2, new Colour(0.19225, 0.19225, 0.19225), 0, 0, 0);
@@ -185,7 +184,7 @@ public class Main {
         Material fineSpecular = new Material(new Colour(0, 0, 0), new Colour(0.61424, 0.04136, 0.04136), new Colour(0.727811, 0.626959, 0.626959), 500, new Colour(0.1745, 0.01175, 0.01175), 0, 0, 0);
         Material glass = new Material(new Colour(0, 0, 0), new Colour(0, 0, 0), new Colour(0, 0, 0), 100, new Colour(0, 0, 0), 0, 0.9, 0.55);
         Material glassGreen = new Material(new Colour(0, 0, 0), new Colour(0, 0, 0), new Colour(0, 0, 0), 100, new Colour(0, 1, 0), 0.2, 0.9, 0.55);
-        Material waterMaterial = new Material(new Colour(0,0,0), new Colour(0.05,0.1,0.4 ), new Colour(0.08, 0.05, 0.05), 100, new Colour(0.01, 0.01, 0.01), 0, 0.9, 0.75);
+        Material waterMaterial = new Material(new Colour(0, 0, 0), new Colour(0.05, 0.1, 0.4), new Colour(0.08, 0.05, 0.05), 100, new Colour(0.01, 0.01, 0.01), 0, 0.9, 0.75);
 
         // Build objects
         ArrayList<Object> objects = new ArrayList<>();
@@ -263,18 +262,22 @@ public class Main {
         //objects.add(tapered);
 
         Water water = new Water(waterMaterial);
-        water.transform(tf.translate(0, 0, 5).multiply(tf.scale(20,20,1)), tf.inverseScale(20,20,1).multiply(tf.inverseTranslate(0,0,5)));
+        water.transform(tf.translate(0, 0, 5).multiply(tf.scale(20, 20, 1)), tf.inverseScale(20, 20, 1).multiply(tf.inverseTranslate(0, 0, 5)));
         water.setxWaves(10);
-        water.setyWaves(0);
-        water.setAmplitude(15);
+        water.setyWaves(5);
+        water.setAmplitude(7);
         objects.add(water);
+
+        Sphere steelBall = new Sphere(chrome);
+        steelBall.transform(tf.translate(0,0,9), tf.inverseTranslate(0,0,9));
+        objects.add(steelBall);
 
         Plane groundplane = new Plane(obsidian);
         groundplane.transform(tf.translate(0, 0, -9), tf.inverseTranslate(0, 0, -9));
         objects.add(groundplane);
 
         Cube underwater = new Cube(jade);
-        underwater.transform(tf.translate(0, 0, 5).multiply(tf.scale(3,3,3)), tf.inverseScale(3,3,3).multiply(tf.inverseTranslate(0, 0, 5)));
+        underwater.transform(tf.translate(0, 0, 5).multiply(tf.scale(3, 3, 3)), tf.inverseScale(3, 3, 3).multiply(tf.inverseTranslate(0, 0, 5)));
         objects.add(underwater);
 
         // Declare camera position
