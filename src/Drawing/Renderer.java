@@ -65,7 +65,7 @@ public class Renderer {
                 }
             }
 
-            if (depth <= 10) {
+            if (depth <= 15) {
 
                 // Refraction logic
                 boolean toReflect = false;

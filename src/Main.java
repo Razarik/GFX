@@ -11,11 +11,13 @@ public class Main {
         // World boxedWorld = Worlds.createBoxedWorld();
         //boxedWorld.addAxes(15);
 
-        //World waterWorld = Worlds.createWaterBox();
+        World waterWorld = Worlds.createWaterBox();
 
-        World booleanWorld = Worlds.createBooleanWorld();
+        //World booleanWorld = Worlds.createBooleanWorld();
+
+        World glassWorld = Worlds.createGlassCup();
 
         Renderer renderer = new Renderer();
-        renderer.render(booleanWorld);
+        renderer.render(glassWorld);
     }
 }
