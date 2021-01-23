@@ -5,6 +5,7 @@ import Calculations.Ray;
 import Calculations.Vector;
 import Calculations.Point;
 import Light.Material;
+import Statics.Globals;
 
 import java.util.ArrayList;
 
@@ -72,9 +73,8 @@ public class Cylinder extends Object {
     private void addIfInCap(ArrayList<Intersection> intersections, Point origin, Vector direction, double t, double radius, boolean isTop) {
         double x = origin.getX() + direction.getX() * t;
         double y = origin.getY() + direction.getY() * t;
-        double epsilon = 0.00001;
         boolean entering = false;
-        if (x * x + y * y < radius * radius + epsilon) {
+        if (x * x + y * y < radius * radius + Globals.ERROR) {
             if (isTop) {
                 if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, 1)) >= 0) {
                     entering = true;

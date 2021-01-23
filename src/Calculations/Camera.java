@@ -1,5 +1,7 @@
 package Calculations;
 
+import Statics.Globals;
+
 public class Camera {
     private Point eye;
     private Vector direction;
@@ -14,7 +16,7 @@ public class Camera {
         this.roll = roll;
         this.distance = distance;
         this.up = direction.crossProduct(new Vector(0, 0, -1));
-        if (this.up.norm() < 0.000001) {
+        if (this.up.norm() < Globals.ERROR) {
             this.up = direction.crossProduct(new Vector(0, 1, 0)).normalise();
         } else {
             this.up = this.up.normalise();

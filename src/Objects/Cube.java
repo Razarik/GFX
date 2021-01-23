@@ -5,6 +5,7 @@ import Calculations.Point;
 import Calculations.Ray;
 import Calculations.Vector;
 import Light.Material;
+import Statics.Globals;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,6 @@ public class Cube extends Object {
     public void getHit(Ray ray, ArrayList<Intersection> intersections) {
         Point origin = inverseTransformation.multiply(ray.getOrigin());
         Vector direction = inverseTransformation.multiply(ray.getDirection());
-        double epsilon = 0.00001;
         if (direction.getX() != -1) {
             double t = (-1 - origin.getX()) / direction.getX();
             double y = origin.getY() + t * direction.getY();
@@ -26,7 +26,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(-1, 0, 0)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(z) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
+            if (Math.abs(z) < 1 + Globals.ERROR && Math.abs(y) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(-1, 0, 0)), this, entering));
             }
         }
@@ -38,7 +38,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(1, 0, 0)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(z) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
+            if (Math.abs(z) < 1 + Globals.ERROR && Math.abs(y) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(1, 0, 0)), this, entering));
             }
         }
@@ -50,7 +50,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(0, -1, 0)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(z) < 1 + epsilon && Math.abs(x) < 1 + epsilon) {
+            if (Math.abs(z) < 1 + Globals.ERROR && Math.abs(x) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, -1, 0)), this, entering));
             }
         }
@@ -62,7 +62,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(0, 1, 0)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(z) < 1 + epsilon && Math.abs(x) < 1 + epsilon) {
+            if (Math.abs(z) < 1 + Globals.ERROR && Math.abs(x) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 1, 0)), this, entering));
             }
         }
@@ -74,7 +74,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, -1)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(x) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
+            if (Math.abs(x) < 1 + Globals.ERROR && Math.abs(y) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, -1)), this, entering));
             }
         }
@@ -86,7 +86,7 @@ public class Cube extends Object {
             if (direction.multiplyElement(-1).dotProduct(new Vector(0, 0, 1)) >= 0) {
                 entering = true;
             }
-            if (Math.abs(x) < 1 + epsilon && Math.abs(y) < 1 + epsilon) {
+            if (Math.abs(x) < 1 + Globals.ERROR && Math.abs(y) < 1 + Globals.ERROR) {
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(0, 0, 1)), this, entering));
             }
         }
