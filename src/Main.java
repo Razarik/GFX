@@ -5,6 +5,9 @@ import Light.Colour;
 import Light.LightSource;
 import Light.Material;
 import Objects.*;
+import Objects.Boolean.DifferenceBool;
+import Objects.Boolean.IntersectionBool;
+import Objects.Boolean.UnionBool;
 import Objects.Object;
 
 import java.util.ArrayList;
@@ -266,11 +269,11 @@ public class Main {
         water.setxWaves(10);
         water.setyWaves(5);
         water.setAmplitude(7);
-        objects.add(water);
+        //objects.add(water);
 
         Sphere steelBall = new Sphere(chrome);
-        steelBall.transform(tf.translate(0,0,9), tf.inverseTranslate(0,0,9));
-        objects.add(steelBall);
+        steelBall.transform(tf.translate(0, 0, 9), tf.inverseTranslate(0, 0, 9));
+        //objects.add(steelBall);
 
         Plane groundplane = new Plane(obsidian);
         groundplane.transform(tf.translate(0, 0, -9), tf.inverseTranslate(0, 0, -9));
@@ -278,21 +281,48 @@ public class Main {
 
         Cube underwater = new Cube(jade);
         underwater.transform(tf.translate(0, 0, 5).multiply(tf.scale(3, 3, 3)), tf.inverseScale(3, 3, 3).multiply(tf.inverseTranslate(0, 0, 5)));
-        objects.add(underwater);
+        //objects.add(underwater);
+
+
+        Sphere left = new Sphere(jade);
+        left.transform(tf.translate(0.5, 0, 5), tf.inverseTranslate(0.5, 0, 5));
+        //objects.add(left);
+
+        Sphere right = new Sphere(jade);
+        right.transform(tf.translate(0, 0, 5), tf.inverseTranslate(0, 0, 5));
+        //objects.add(right);
+
+        Cube box = new Cube(gold);
+        box.transform(tf.translate(0, 0, 5).multiply(tf.scale(3, 3, 3)), tf.inverseScale(3, 3, 3).multiply(tf.inverseTranslate(0, 0, 5)));
+
+        Cylinder hole = new Cylinder(silver);
+        hole.transform(tf.translate(0,0,1).multiply(tf.scale(1,1,8)), tf.inverseScale(1,1,8).multiply(tf.inverseTranslate(0,0,1)));
+
+        UnionBool union = new UnionBool(left, right);
+        //objects.add(union);
+
+        DifferenceBool difference = new DifferenceBool(box, hole);
+        //objects.add(difference);
+
+        IntersectionBool intersect = new IntersectionBool(left, right);
+        objects.add(intersect);
+
+        //objects.add(box);
+        //objects.add(hole);
 
         // Declare camera position
-        Point eye = new Point(15, 15, 19);
+        Point eye = new Point(0, 10, 5);
 
-        Camera camera = new Camera(eye, new Point(0, 0, 0), 0, 1000);
+        Camera camera = new Camera(eye, new Point(0, 0, 5), 0, 1000);
 
         // Build light sources
         ArrayList<LightSource> lights = new ArrayList<>();
-        LightSource light1 = new LightSource(new Point(1, 10, 15), new Colour(0.7, 0.7, 0.7), new Colour(0.3, 0.3, 0.3));
+        LightSource light1 = new LightSource(new Point(0, 15, 15), new Colour(0.7, 0.7, 0.7), new Colour(0.3, 0.3, 0.3));
         lights.add(light1);
         LightSource light2 = new LightSource(new Point(10, 1, 3), new Colour(0.2, 0.2, 0.2), new Colour(0.3, 0.3, 0.3));
-        lights.add(light2);
+        //lights.add(light2);
         LightSource light3 = new LightSource(new Point(-15, -15, 15), new Colour(0.5, 0.5, 0.5), new Colour(0.4, 0.4, 0.4));
-        lights.add(light3);
+        //lights.add(light3);
 
         //Intersection loop
         for (int column = 0; column < width; column++) {

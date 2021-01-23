@@ -42,6 +42,7 @@ public class Cylinder extends Object {
             double t = -b / (2 * a);
             double z = origin.getZ() + t * direction.getZ();
             if (z <= 1 && z >= 0) {
+
                 intersections.add(new Intersection(t, transformation.multiply(origin.add(direction.multiplyElement(t))), inverseTransformation.transpose().multiply(new Vector(origin.getX() + t * direction.getX(), origin.getY() + t * direction.getY(), -u * (1 + u * z))), this, false));
             }
         } else if (discriminant > 0) {
@@ -49,20 +50,21 @@ public class Cylinder extends Object {
             double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
             double z1 = origin.getZ() + t1 * direction.getZ();
             double z2 = origin.getZ() + t2 * direction.getZ();
-            boolean entering = false;
+            boolean entering1 = false;
             if (z1 <= 1 && z1 >= 0) {
                 Vector normal = new Vector(origin.getX() + t1 * direction.getX(), origin.getY() + t1 * direction.getY(), -u * (1 + u * z1));
                 if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
-                    entering = true;
+                    entering1 = true;
                 }
-                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), inverseTransformation.transpose().multiply(normal), this, entering));
+                intersections.add(new Intersection(t1, transformation.multiply(origin.add(direction.multiplyElement(t1))), inverseTransformation.transpose().multiply(normal), this, entering1));
             }
+            boolean entering2 = false;
             if (z2 <= 1 && z2 >= 0) {
                 Vector normal = new Vector(origin.getX() + t2 * direction.getX(), origin.getY() + t2 * direction.getY(), -u * (1 + u * z2));
                 if (direction.multiplyElement(-1).dotProduct(normal) >= 0) {
-                    entering = true;
+                    entering2 = true;
                 }
-                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), inverseTransformation.transpose().multiply(normal), this, entering));
+                intersections.add(new Intersection(t2, transformation.multiply(origin.add(direction.multiplyElement(t2))), inverseTransformation.transpose().multiply(normal), this, entering2));
             }
         }
     }

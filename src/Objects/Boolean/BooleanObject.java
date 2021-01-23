@@ -7,13 +7,11 @@ import Objects.Object;
 import java.util.ArrayList;
 
 public class BooleanObject extends Object {
-    private Object left;
-    private Object right;
+    protected Object left;
+    protected Object right;
 
     public BooleanObject(){
         super(null);
-        left = null;
-        right = null;
     }
 
     public void getHit(Ray ray, ArrayList<Intersection> intersections){

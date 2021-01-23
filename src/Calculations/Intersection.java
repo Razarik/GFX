@@ -2,7 +2,7 @@ package Calculations;
 
 import Objects.Object;
 
-public class Intersection {
+public class Intersection implements Comparable<Intersection> {
     private double hitTime;
     private Point hitPoint;
     private Vector hitNormal;
@@ -55,5 +55,16 @@ public class Intersection {
 
     public void setEntering(boolean entering) {
         isEntering = entering;
+    }
+
+    public int compareTo(Intersection otherIntersection) {
+        double difference = hitTime - otherIntersection.getHitTime();
+        if (difference > 0) {
+            return 1;
+        } else if (difference == 0) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 }
