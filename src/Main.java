@@ -5,15 +5,11 @@ import Statics.Worlds;
 
 public class Main {
     public static void main(String[] args) {
-        // Make transformation factory
-        TransformationFactory tf = new TransformationFactory();
-
-        // World boxedWorld = Worlds.createBoxedWorld();
-        //boxedWorld.addAxes(15);
+        World boxedWorld = Worlds.createBoxedWorld();
 
         World waterWorld = Worlds.createWaterBox();
 
-        //World booleanWorld = Worlds.createBooleanWorld();
+        World booleanWorld = Worlds.createBooleanWorld();
 
         World glassWorld = Worlds.createGlassCup();
 
@@ -25,7 +21,11 @@ public class Main {
 
         World lensWorld = Worlds.createLensWorld();
 
+        World fullWorld = Worlds.createFullWorld();
+
+        World gemWorld = Worlds.createGemWorld();
+
         Renderer renderer = new Renderer();
-        renderer.render(lensWorld);
+        renderer.render(fullWorld);
     }
 }

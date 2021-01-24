@@ -6,6 +6,7 @@ import Calculations.TransformationFactory;
 import Drawing.World;
 import Light.Colour;
 import Light.LightSource;
+import Light.Material;
 import Objects.*;
 import Objects.Boolean.DifferenceBool;
 import Objects.Boolean.IntersectionBool;
@@ -363,5 +364,165 @@ public class Worlds {
         return new World(camera, objects, lightSources);
     }
 
+    public static World createFullWorld() {
+        TransformationFactory tf = new TransformationFactory();
+        Point eye = new Point(20, 20, 20);
+        Camera camera = new Camera(eye, new Point(0, 0, 0), 0, 1000);
+        ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<LightSource> lightSources = new ArrayList<>();
 
+        LightSource light1 = new LightSource(new Point(20, -20, 20), new Colour(0.8, 0.8, 0.8), new Colour(0.3, 0.3, 0.3));
+        lightSources.add(light1);
+
+
+        Cube bigCube = new Cube(Materials.YELLOWRUBBER);
+        bigCube.transform(tf.scale(40, 40, 40), tf.inverseScale(40, 40, 40));
+        objects.add(bigCube);
+
+        Plane ground = new Plane(Materials.WHITERUBBER);
+        objects.add(ground);
+
+        Cube rubyCube = new Cube(Materials.RUBY);
+        rubyCube.transform(tf.translate(5, -5, 4)
+                        .multiply(tf.xRoll(Math.toRadians(35.26)))
+                        .multiply(tf.yRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(2, 2, 2)),
+                tf.inverseScale(2, 2, 2)
+                        .multiply(tf.inverseYRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseXRoll(Math.toRadians(35.26)))
+                        .multiply(tf.inverseTranslate(5, -5, 4)));
+        objects.add(rubyCube);
+
+        Cube box = new Cube(Materials.BRONZE);
+        box.transform(tf.translate(-5, 5, 3)
+                        .multiply(tf.zRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(3, 3, 3)),
+                tf.inverseScale(3, 3, 3)
+                        .multiply(tf.inverseZRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseTranslate(-5, 5, 3)));
+        Sphere dome = new Sphere(Materials.BRONZE);
+        dome.transform(tf.translate(-5, 5, 6)
+                        .multiply(tf.scale(3, 3, 3)),
+                tf.inverseScale(3, 3, 3)
+                        .multiply(tf.inverseTranslate(-5, 5, 6)));
+        UnionBool domedBox = new UnionBool(box, dome);
+        objects.add(domedBox);
+
+        Cube mirror = new Cube(Materials.MIRROR);
+        mirror.transform(tf.translate(-39.79, 0, 15)
+                        .multiply(tf.scale(0.1, 15, 15)),
+                tf.inverseScale(0.1, 15, 15)
+                        .multiply(tf.inverseTranslate(-39.79, 0, 15)));
+        objects.add(mirror);
+
+        World world = new World(camera, objects, lightSources);
+        world.addAxes(40);
+
+        return world;
+    }
+
+    public static World createGemWorld() {
+        TransformationFactory tf = new TransformationFactory();
+        Point eye = new Point(5, 10, 8);
+        Camera camera = new Camera(eye, new Point(0, 0, 0), 0, 1000);
+        ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<LightSource> lightSources = new ArrayList<>();
+
+        LightSource light1 = new LightSource(new Point(7, -5, 8), new Colour(0.8, 0.8, 0.8), new Colour(0.3, 0.3, 0.3));
+        lightSources.add(light1);
+
+
+        Cube bigCube = new Cube(Materials.WHITERUBBER);
+        bigCube.transform(tf.scale(11, 11, 11), tf.inverseScale(11, 11, 11));
+        objects.add(bigCube);
+
+        double xPosition = 0;
+        double yPosition = 0;
+        double zPosition = 0;
+        Material gemMaterial = Materials.EMERALD;
+
+        Cube gemPart1 = new Cube(gemMaterial);
+        gemPart1.transform(tf.translate(xPosition, yPosition, zPosition)
+                        .multiply(tf.xRoll(Math.toRadians(35.26)))
+                        .multiply(tf.yRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(2, 2, 2)),
+                tf.inverseScale(2, 2, 2)
+                        .multiply(tf.inverseYRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseXRoll(Math.toRadians(35.26)))
+                        .multiply(tf.inverseTranslate(xPosition, yPosition, zPosition)));
+
+        Cube gemPart2 = new Cube(gemMaterial);
+        gemPart2.transform(tf.translate(xPosition, yPosition, zPosition)
+                        .multiply(tf.zRoll(Math.toRadians(90)))
+                        .multiply(tf.xRoll(Math.toRadians(35.26)))
+                        .multiply(tf.yRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(2, 2, 2)),
+                tf.inverseScale(2, 2, 2)
+                        .multiply(tf.inverseYRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseXRoll(Math.toRadians(35.26)))
+                        .multiply(tf.inverseZRoll(Math.toRadians(90)))
+                        .multiply(tf.inverseTranslate(xPosition, yPosition, zPosition)));
+
+
+        Cube gemPart3 = new Cube(gemMaterial);
+        gemPart3.transform(tf.translate(xPosition, yPosition, zPosition)
+                        .multiply(tf.zRoll(Math.toRadians(180)))
+                        .multiply(tf.xRoll(Math.toRadians(35.26)))
+                        .multiply(tf.yRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(2, 2, 2)),
+                tf.inverseScale(2, 2, 2)
+                        .multiply(tf.inverseYRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseXRoll(Math.toRadians(35.26)))
+                        .multiply(tf.inverseZRoll(Math.toRadians(180)))
+                        .multiply(tf.inverseTranslate(xPosition, yPosition, zPosition)));
+
+        Cube gemPart4 = new Cube(gemMaterial);
+        gemPart4.transform(tf.translate(xPosition, yPosition, zPosition)
+                        .multiply(tf.zRoll(Math.toRadians(270)))
+                        .multiply(tf.xRoll(Math.toRadians(35.26)))
+                        .multiply(tf.yRoll(Math.toRadians(45)))
+                        .multiply(tf.scale(2, 2, 2)),
+                tf.inverseScale(2, 2, 2)
+                        .multiply(tf.inverseYRoll(Math.toRadians(45)))
+                        .multiply(tf.inverseXRoll(Math.toRadians(35.26)))
+                        .multiply(tf.inverseZRoll(Math.toRadians(270)))
+                        .multiply(tf.inverseTranslate(xPosition, yPosition, zPosition)));
+
+        IntersectionBool gemPart12 = new IntersectionBool(gemPart1, gemPart2);
+        IntersectionBool gemPart34 = new IntersectionBool(gemPart3, gemPart4);
+        IntersectionBool gemUncut = new IntersectionBool(gemPart12, gemPart34);
+
+        Cube gemCutTop = new Cube(gemMaterial);
+        gemCutTop.transform(tf.translate(xPosition, yPosition, zPosition + 5)
+                        .multiply(tf.scale(4, 4, 4)),
+                tf.inverseScale(4, 4, 4)
+                        .multiply(tf.inverseTranslate(xPosition, yPosition, zPosition + 5)));
+
+        DifferenceBool gem = new DifferenceBool(gemUncut, gemCutTop);
+
+        Material ringMaterial = Materials.GOLD;
+
+        Sphere uncutBand = new Sphere(ringMaterial);
+        uncutBand.transform(tf.translate(0, 0, -4.41)
+                        .multiply(tf.scale(3, 3, 3)),
+                tf.inverseScale(3, 3, 3)
+                        .multiply(tf.inverseTranslate(0, 0, -4.41)));
+
+        UnionBool gemOnAnOrb = new UnionBool(gem, uncutBand);
+
+        Cylinder hole = new Cylinder(ringMaterial);
+        hole.transform(tf.translate(0, 3.5, -4.41)
+                        .multiply(tf.xRoll(Math.toRadians(90)))
+                        .multiply(tf.scale(2.7, 2.7, 7)),
+                tf.inverseScale(2.7, 2.7, 7)
+                        .multiply(tf.inverseXRoll(Math.toRadians(90)))
+                        .multiply(tf.inverseTranslate(0, 3.5, -4.41)));
+
+        DifferenceBool ring = new DifferenceBool(gemOnAnOrb, hole);
+
+        objects.add(ring);
+
+
+        return new World(camera, objects, lightSources);
+    }
 }
