@@ -6,6 +6,8 @@ import Light.LightSource;
 import Objects.Object;
 import Objects.Water;
 import Statics.Globals;
+import Textures.NoTexture;
+import Textures.Texture;
 
 import java.util.ArrayList;
 
@@ -29,8 +31,14 @@ public class Renderer {
                 normal = normal.multiplyElement(-1);
             }
 
+            // Check if texture is using world coordinates or generic coordinates
+            Point texturePoint = hitPoint;
+            if (!object.getMaterial().getTexture().isWorldTexture()) {
+                texturePoint = object.getInverseTransformation().multiply(hitPoint);
+            }
+
             // Ambient colour
-            colour = colour.add(world.getAmbient().multiply(object.getMaterial().getAmbient()));
+            colour = colour.add(world.getAmbient().multiply(object.getMaterial().getAmbient()).multiply(object.getMaterial().getTexture().texture(texturePoint.getX(), texturePoint.getY(), texturePoint.getZ())));
 
             for (LightSource lightSource : world.getLightSources()) {
                 //Shadow
@@ -51,7 +59,7 @@ public class Renderer {
                 Vector s = lightSource.getPoint().subtract(hitPoint).normalise();
                 double mDotS = s.dotProduct(normal);
                 if (mDotS > Globals.ERROR) {
-                    Colour diffuseColour = object.getMaterial().getDiffuse().multiply(mDotS).multiply(lightSource.getColour()).multiply(1 - shadeFactor);
+                    Colour diffuseColour = object.getMaterial().getDiffuse().multiply(mDotS).multiply(lightSource.getColour()).multiply(1 - shadeFactor).multiply(object.getMaterial().getTexture().texture(texturePoint.getX(), texturePoint.getY(), texturePoint.getZ()));
                     colour = colour.add(diffuseColour);
                 }
 

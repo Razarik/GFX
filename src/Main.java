@@ -19,7 +19,13 @@ public class Main {
 
         World reflectionRefraction = Worlds.reflectionRefraction();
 
+        World coverWorld = Worlds.createCoverWorld();
+
+        World textureWorld = Worlds.createTextureWorld();
+
+        World lensWorld = Worlds.createLensWorld();
+
         Renderer renderer = new Renderer();
-        renderer.render(glassWorld);
+        renderer.render(lensWorld);
     }
 }

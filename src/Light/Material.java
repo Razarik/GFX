@@ -1,5 +1,8 @@
 package Light;
 
+import Textures.NoTexture;
+import Textures.Texture;
+
 public class Material {
     private Colour emissive;
     private Colour diffuse;
@@ -9,6 +12,7 @@ public class Material {
     private double shininess;
     private double transparency;
     private double relativeLightSpeed;
+    private Texture texture;
 
     public Material(Colour emissive, Colour diffuse, Colour specular, double specularExponent, Colour ambient, double shininess, double transparency, double relativeLightSpeed) {
         this.emissive = emissive;
@@ -19,6 +23,19 @@ public class Material {
         this.shininess = shininess;
         this.transparency = transparency;
         this.relativeLightSpeed = relativeLightSpeed;
+        this.texture = new NoTexture();
+    }
+
+    public Material(Colour emissive, Colour diffuse, Colour specular, double specularExponent, Colour ambient, double shininess, double transparency, double relativeLightSpeed, Texture texture) {
+        this.emissive = emissive;
+        this.diffuse = diffuse;
+        this.specular = specular;
+        this.specularExponent = specularExponent;
+        this.ambient = ambient;
+        this.shininess = shininess;
+        this.transparency = transparency;
+        this.relativeLightSpeed = relativeLightSpeed;
+        this.texture = texture;
     }
 
     public Colour getEmissive() {
@@ -83,5 +100,13 @@ public class Material {
 
     public void setRelativeLightSpeed(double relativeLightSpeed) {
         this.relativeLightSpeed = relativeLightSpeed;
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
     }
 }

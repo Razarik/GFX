@@ -2,6 +2,7 @@ package Statics;
 
 import Light.Colour;
 import Light.Material;
+import Textures.WoodGrain;
 
 public class Materials {
 
@@ -162,5 +163,11 @@ public class Materials {
             new Colour(0, 0, 0), 0,
             new Colour(0, 0, 0),
             0, 0, 0);
+    public static Material WOOD = new Material(new Colour(0,0,0),
+            new Colour(0.365234375, 0.251953125, 0.126953125),
+            new Colour(0.1, 0.1, 0.1), 200,
+            new Colour(0.187, 0.129, 0.065),
+            0,0,0,
+            new WoodGrain(0.8,0.2,0.015, 0.2, 10, 8));
 
 }
