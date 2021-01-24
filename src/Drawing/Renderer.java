@@ -65,11 +65,11 @@ public class Renderer {
                 }
             }
 
-            if (depth <= 15) {
+            if (depth <= Globals.DEPTH) {
 
                 // Refraction logic
                 boolean toReflect = false;
-                if (object.getMaterial().getTransparency() >= 0.05) { // If object is transparent enough
+                if (object.getMaterial().getTransparency() >= Globals.ERROR) { // If object is transparent enough
                     Vector dir = ray.getDirection().multiplyElement(-1).normalise();
                     double c1, c2;
                     Object inside = ray.getHighestPriority();
@@ -124,7 +124,7 @@ public class Renderer {
                 }
 
                 // Reflection logic
-                if (object.getMaterial().getShininess() >= 0.05 || toReflect) {  // If object is shiny enough to reflect, or total internal reflection
+                if (object.getMaterial().getShininess() >= Globals.ERROR || toReflect) {  // If object is shiny enough to reflect, or total internal reflection
                     Ray reflection = new Ray(hitPoint, ray.getDirection().add(normal.multiplyElement(ray.getDirection().dotProduct(normal) * -2)));
                     reflection.setInside(ray.getInside());
                     Colour reflectionColour = getShade(reflection, depth + 1, world);

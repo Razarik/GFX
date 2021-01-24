@@ -143,4 +143,19 @@ public class Worlds {
 
         return world;
     }
+
+    public static World reflectionRefraction(){
+        World world = createBoxedWorld();
+        TransformationFactory tf = new TransformationFactory();
+
+        Cube testCube = new Cube(Materials.GOLD);
+        testCube.transform(tf.scale(3,3,3), tf.inverseScale(3,3,3));
+        world.addObject(testCube);
+
+        Sphere toReflect = new Sphere(Materials.GREENRUBBER);
+        toReflect.transform(tf.translate(5,0,0), tf.inverseTranslate(5,0,0));
+        world.addObject(toReflect);
+
+        return world;
+    }
 }

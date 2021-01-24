@@ -17,6 +17,8 @@ public class Main {
 
         World glassWorld = Worlds.createGlassCup();
 
+        World reflectionRefraction = Worlds.reflectionRefraction();
+
         Renderer renderer = new Renderer();
         renderer.render(glassWorld);
     }

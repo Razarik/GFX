@@ -24,4 +24,6 @@ public class Globals {
     public static final int HEIGHT = Integer.parseInt(properties.getProperty("screen_height"));
 
     public static final double ERROR = Double.parseDouble(properties.getProperty("error"));
+
+    public static final int DEPTH = Integer.parseInt(properties.getProperty("render_depth"));
 }
