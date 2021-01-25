@@ -373,6 +373,8 @@ public class Worlds {
 
         LightSource light1 = new LightSource(new Point(20, -20, 20), new Colour(0.8, 0.8, 0.8), new Colour(0.3, 0.3, 0.3));
         lightSources.add(light1);
+        LightSource light2 = new LightSource(new Point(15, 17, 14), new Colour(0.7, 0.7, 0.7), new Colour(0.15, 0.15, 0.15));
+        lightSources.add(light2);
 
 
         Cube bigCube = new Cube(Materials.YELLOWRUBBER);
@@ -380,6 +382,7 @@ public class Worlds {
         objects.add(bigCube);
 
         Plane ground = new Plane(Materials.WHITERUBBER);
+        ground.transform(tf.translate(0, 0, -0.00001), tf.inverseTranslate(0, 0, -0.00001));
         objects.add(ground);
 
         Cube rubyCube = new Cube(Materials.RUBY);
@@ -406,7 +409,17 @@ public class Worlds {
                 tf.inverseScale(3, 3, 3)
                         .multiply(tf.inverseTranslate(-5, 5, 6)));
         UnionBool domedBox = new UnionBool(box, dome);
-        objects.add(domedBox);
+        Cylinder hole = new Cylinder(Materials.OBSIDIAN);
+        hole.transform(tf.translate(-10, -1, -1)
+                        .multiply(tf.zRoll(Math.toRadians(-45)))
+                        .multiply(tf.xRoll(Math.toRadians(-60)))
+                        .multiply(tf.scale(1, 1.2, 15)),
+                tf.inverseScale(1, 1.2, 15)
+                        .multiply(tf.inverseXRoll(Math.toRadians(-60)))
+                        .multiply(tf.inverseZRoll(Math.toRadians(-45)))
+                        .multiply(tf.inverseTranslate(-10, -1, -1)));
+        DifferenceBool domedBoxWithHole = new DifferenceBool(domedBox, hole);
+        objects.add(domedBoxWithHole);
 
         Cube mirror = new Cube(Materials.MIRROR);
         mirror.transform(tf.translate(-39.79, 0, 15)
@@ -415,8 +428,45 @@ public class Worlds {
                         .multiply(tf.inverseTranslate(-39.79, 0, 15)));
         objects.add(mirror);
 
+        Cylinder cone = new Cylinder(Materials.JADE, 0);
+        cone.transform(tf.translate(-3, -6, 0)
+                        .multiply(tf.shearXByZ(0.3))
+                        .multiply(tf.scale(3, 3, 10)),
+                tf.inverseScale(3, 3, 10)
+                        .multiply(tf.inverseShearXByZ(0.3))
+                        .multiply(tf.inverseTranslate(-3, -6, 0)));
+        objects.add(cone);
+
+        Cube glassCube = new Cube(Materials.GLASS);
+        glassCube.transform(tf.translate(9, 9, 5)
+                        .multiply(tf.scale(5, 5, 5)),
+                tf.inverseScale(5, 5, 5)
+                        .multiply(tf.inverseTranslate(9, 9, 5)));
+        Cube cutOutGlass = new Cube(Materials.GLASS);
+        cutOutGlass.transform(tf.translate(9, 9, 5.5)
+                        .multiply(tf.scale(4.5, 4.5, 5)),
+                tf.inverseScale(4.5, 4.5, 5)
+                        .multiply(tf.inverseTranslate(9, 9, 5.5)));
+        DifferenceBool glassBasin = new DifferenceBool(glassCube, cutOutGlass);
+        objects.add(glassBasin);
+
+        Cylinder stumpBase = new Cylinder(Materials.WOOD);
+        stumpBase.transform(tf.translate(0, 20, 0)
+                        .multiply(tf.scale(5, 5, 4)),
+                tf.inverseScale(5, 5, 4)
+                        .multiply(tf.inverseTranslate(0, 20, 0)));
+        Cube stumpCutOut = new Cube(Materials.WOOD);
+        stumpCutOut.transform(tf.translate(0, 15, 0)
+                        .multiply(tf.scale(3, 3.535533906, 5))
+                        .multiply(tf.zRoll(Math.toRadians(45))),
+                tf.inverseZRoll(Math.toRadians(45))
+                        .multiply(tf.inverseScale(3, 3.535533906, 5))
+                        .multiply(tf.inverseTranslate(0, 15, 0)));
+        DifferenceBool stump = new DifferenceBool(stumpBase, stumpCutOut, true);
+        objects.add(stump);
+
         World world = new World(camera, objects, lightSources);
-        world.addAxes(40);
+        //world.addAxes(40);
 
         return world;
     }
