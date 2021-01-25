@@ -12,7 +12,7 @@ Afterwards, you can begin creating your world and pass the finished object to th
 contained in the Worlds class and can be passed to the renderer for visualisation. Pictures of a few of those are shown
 here.
 
-![plot](Example pictures/Canoe.png "Canoe")
-![plot](Example pictures/GlassOfWater.png "Glass of water")
-![plot](Example pictures/Cover.png "Spheres")
-![plot](Example pictures/RING.png "Ring")
+![plot](https://github.com/Razarik/GFX/blob/master/Example%20pictures/Canoe.png "Canoe")
+![plot](https://github.com/Razarik/GFX/blob/master/Example%20pictures/GlassOfWater.png "Glass of water")
+![plot](https://github.com/Razarik/GFX/blob/master/Example%20pictures/Cover.png "Spheres")
+![plot](https://github.com/Razarik/GFX/blob/master/Example%20pictures/Ring.png "Ring")
