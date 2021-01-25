@@ -17,4 +17,22 @@ public class BooleanObject extends Object {
     public void getHit(Ray ray, ArrayList<Intersection> intersections){
 
     }
+
+    public Object getLeft() {
+        return left;
+    }
+
+    public void setLeft(Object left) {
+        this.left = left;
+    }
+
+    public Object getRight() {
+        return right;
+    }
+
+    public void setRight(Object right) {
+        this.right = right;
+    }
+
+
 }

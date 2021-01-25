@@ -8,10 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DifferenceBool extends BooleanObject {
+
+    private boolean homogenous;
+
     public DifferenceBool(Object left, Object right) {
         super();
         this.left = left;
         this.right = right;
+        this.homogenous = false;
+    }
+
+    public DifferenceBool(Object left, Object right, boolean homogenous) {
+        super();
+        this.left = left;
+        this.right = right;
+        this.homogenous = homogenous;
     }
 
     @Override
@@ -50,6 +61,13 @@ public class DifferenceBool extends BooleanObject {
                 } else {
                     rightInside = rightIntersection.isEntering();
                     toAdd = rightIntersection;
+                    if (homogenous) {
+                        Object realHit = this.left;
+                        while (realHit instanceof BooleanObject) {
+                            realHit = ((BooleanObject) realHit).getLeft();
+                        }
+                        toAdd.setHitObject(realHit);
+                    }
                     rightIntersections.remove(0);
                 }
                 if (combinedInside != (leftInside && !rightInside)) {

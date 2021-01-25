@@ -71,7 +71,7 @@ public class Worlds {
                         .multiply(tf.scale(2, 7.6, 1)),
                 tf.inverseScale(2, 7.6, 1)
                         .multiply(tf.inverseTranslate(0, 0, 7.5)));
-        DifferenceBool canoeCut = new DifferenceBool(canoeBase, top);
+        DifferenceBool canoeCut = new DifferenceBool(canoeBase, top, true);
         Cylinder inside = new Cylinder(Materials.WOOD);
         inside.transform(tf.translate(0, 6, 5)
                         .multiply(tf.xRoll(Math.toRadians(90)))
@@ -79,7 +79,7 @@ public class Worlds {
                 tf.inverseScale(2, 2, 12)
                         .multiply(tf.inverseXRoll(Math.toRadians(90)))
                         .multiply(tf.inverseTranslate(0, 6, 5)));
-        DifferenceBool canoe = new DifferenceBool(canoeCut, inside);
+        DifferenceBool canoe = new DifferenceBool(canoeCut, inside, true);
         world.addObject(canoe);
 
         DifferenceBool waterWithCanoe = new DifferenceBool(water, canoeBase);
