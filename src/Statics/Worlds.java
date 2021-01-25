@@ -117,7 +117,7 @@ public class Worlds {
         return world;
     }
 
-    public static World createGlassCup() {
+    public static World createGlassCupWorld() {
         World world = createBoxedWorld();
         TransformationFactory tf = new TransformationFactory();
 
@@ -184,7 +184,7 @@ public class Worlds {
         return world;
     }
 
-    public static World reflectionRefraction() {
+    public static World reflectionRefractionWorld() {
         World world = createBoxedWorld();
         TransformationFactory tf = new TransformationFactory();
 
@@ -572,6 +572,33 @@ public class Worlds {
 
         objects.add(ring);
 
+
+        return new World(camera, objects, lightSources);
+    }
+
+    public static World createColoredLightWorld() {
+        TransformationFactory tf = new TransformationFactory();
+        Point eye = new Point(10, 0, 10);
+        Camera camera = new Camera(eye, new Point(0, 0, 0), 0, 1000);
+        ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<LightSource> lightSources = new ArrayList<>();
+
+        LightSource redLight = new LightSource(new Point(5, 0, 10), new Colour(0.8, 0, 0), new Colour(0.2, 0, 0));
+        lightSources.add(redLight);
+
+        LightSource greenLight = new LightSource(new Point(-2.5, 4.330127019, 10), new Colour(0, 0.8, 0), new Colour(0, 0.2, 0));
+        lightSources.add(greenLight);
+
+        LightSource blueLight = new LightSource(new Point(-2.5, -4.330127019, 10), new Colour(0, 0, 0.8), new Colour(0, 0, 0.2));
+        lightSources.add(blueLight);
+
+        Cube cube = new Cube(Materials.CHROME);
+        cube.transform(tf.scale(3, 3, 3), tf.inverseScale(3, 3, 3));
+        objects.add(cube);
+
+        Cube bigCube = new Cube(Materials.CHROME);
+        bigCube.transform(tf.scale(20, 20, 20), tf.inverseScale(20, 20, 20));
+        objects.add(bigCube);
 
         return new World(camera, objects, lightSources);
     }

@@ -10,9 +10,9 @@ public class Main {
 
         World booleanWorld = Worlds.createBooleanWorld();
 
-        World glassWorld = Worlds.createGlassCup();
+        World glassWorld = Worlds.createGlassCupWorld();
 
-        World reflectionRefraction = Worlds.reflectionRefraction();
+        World reflectionRefraction = Worlds.reflectionRefractionWorld();
 
         World coverWorld = Worlds.createCoverWorld();
 
@@ -24,7 +24,9 @@ public class Main {
 
         World gemWorld = Worlds.createGemWorld();
 
+        World lightWorld = Worlds.createColoredLightWorld();
+
         Renderer renderer = new Renderer();
-        renderer.render(fullWorld);
+        renderer.render(lightWorld);
     }
 }
