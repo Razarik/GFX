@@ -1,4 +1,3 @@
-import Calculations.*;
 import Drawing.Renderer;
 import Drawing.World;
 import Statics.Worlds;

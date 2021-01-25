@@ -1,6 +1,5 @@
 package Calculations;
 
-import Light.Material;
 import Objects.Object;
 
 import java.util.ArrayList;

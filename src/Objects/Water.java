@@ -8,7 +8,6 @@ import Light.Material;
 import Statics.Globals;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Water extends Object {
     private double xWaves;

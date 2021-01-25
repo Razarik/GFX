@@ -6,8 +6,6 @@ import Light.LightSource;
 import Objects.Object;
 import Objects.Water;
 import Statics.Globals;
-import Textures.NoTexture;
-import Textures.Texture;
 
 import java.util.ArrayList;
 
